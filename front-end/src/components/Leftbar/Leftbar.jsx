@@ -10,6 +10,10 @@ export default function Leftbar() {
       <div className='leftbarWrapper'>
         <ul className="sidebarList">
           <li className="sidebarListItem">
+            <img src="/images/persons/profile1.jpg" alt="" className="leftbarProfileImg" />
+            <span className="sidebarListText">Peter Mbegbu</span>
+          </li>
+          <li className="sidebarListItem">
             <RssFeed htmlColor='green' className='sidebarIcon'/>
             <span className="sidebarListText">Feed</span>
           </li>

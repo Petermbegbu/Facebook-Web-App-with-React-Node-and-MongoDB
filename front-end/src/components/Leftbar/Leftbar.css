@@ -3,10 +3,6 @@
     height: cal(100vh - 50px);
 }
 
-.leftbarWrapper {
-    padding: 15px;
-}
-
 .sidebarList {
     padding: 0;
     margin: 0;
@@ -16,9 +12,9 @@
 .sidebarListItem {
     display: flex;
     align-items: center;
-    padding: 14px 5px 14px 5px;
+    padding: 14px 5px;
     cursor: pointer;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px 10px;
 }
 
 .sidebarListItem:hover {
@@ -31,4 +27,12 @@
 
 .sidebarListText {
     font-weight: 500;
+    font-size: 15px;
+}
+
+.leftbarProfileImg {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
