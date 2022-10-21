@@ -1,5 +1,15 @@
 .homeBody {
-    display: flex;
     background-color: #F0F2F5;
-    padding: 25px 15px;
+}
+
+.homeLeft {
+    padding: 20px 15px;
+}
+
+.homeFeed {
+    padding: 20px 15px;
+}
+
+.homeRight {
+    padding: 20px 0px;
 }

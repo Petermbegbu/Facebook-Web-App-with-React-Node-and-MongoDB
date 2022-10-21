@@ -1,6 +1,7 @@
 .leftbarBody {
-    flex: 3;
     height: cal(100vh - 50px);
+    position: sticky;
+    top: 0;
 }
 
 .sidebarList {

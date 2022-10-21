@@ -1,0 +1,44 @@
+
+.userInfoItemBlock {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
+    padding: 20px;
+}
+
+.userInfoTitle {
+    margin-bottom: 20px;
+}
+
+.userInfoItem {
+    margin-bottom: 5px;
+}
+
+.userInfoKey {
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.userInfoValue {
+    color: gray;
+}
+
+.userFriendsBlock {
+    width: 100%;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
+    padding: 20px;
+}
+
+.userFriends {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

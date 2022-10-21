@@ -1,0 +1,59 @@
+.profileBody {
+    background-color: #F0F2F5;
+}
+
+.profileLeft {
+    padding: 20px 15px 0px 15px;
+}
+
+.profileImgBlock {
+    height: 300px;
+    position: relative;
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.profileUserImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: solid thick white;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profileInfoName {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-top: 5px;
+}
+
+.profileInfoDesc {
+    font-weight: 500;
+    color: grey;
+}
+
+.profileFeed {
+    padding-right: 30px;
+}
+
+.profileRight {
+    padding-right: 50px;
+}

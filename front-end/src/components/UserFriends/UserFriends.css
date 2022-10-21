@@ -1,0 +1,19 @@
+
+.userFriendImg{
+    width: 100px;
+    height: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 3px;
+}
+
+.userFriendItem {
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.userFriendName {
+    font-size: 13px;
+    font-weight: 500;
+}
