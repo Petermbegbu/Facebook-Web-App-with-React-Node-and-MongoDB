@@ -1,0 +1,74 @@
+.RegisterBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F0F2F5;
+}
+
+.RegisterWrapper {
+    width: 70%;
+}
+
+.RegisterlogoBar {
+    display: flex;
+    align-items: center;
+}
+
+.RegisterLogo {
+    font-size: 45px;
+    font-weight: 800;
+    color: #0676E8;
+    cursor: pointer;
+}
+
+.RegisterDesc {
+    font-size: 20px;
+}
+
+.formBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formDiv {
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
+    padding: 20px;
+}
+
+.RegisterBtn {
+    background-color: #0676E8;
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    margin: 20px 0px;
+
+}
+
+.RegisterBtn:hover {
+    background-color: #0676E8;
+    color: white;
+}
+
+.LogIntoAcc {
+    background-color: rgb(35, 226, 35);
+    width: 100%;
+    color: white;
+    font-weight: 500;
+}
+
+.LogIntoAcc:hover {
+    background-color: rgb(35, 226, 35);
+    color: white;
+}
+
+.form-control {
+    height: 45px;
+    margin-bottom: 20px;
+}

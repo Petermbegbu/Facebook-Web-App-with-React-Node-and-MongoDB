@@ -1,15 +1,16 @@
 .homeBody {
     background-color: #F0F2F5;
+    padding-top: 30px;
 }
 
 .homeLeft {
-    padding: 20px 15px;
+    padding: 0px 15px;
 }
 
 .homeFeed {
-    padding: 20px 15px;
+    padding: 0px 50px;
 }
 
 .homeRight {
-    padding: 20px 0px;
+    padding: 0px 15px;
 }
