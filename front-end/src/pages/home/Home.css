@@ -1,6 +1,6 @@
 .homeBody {
     background-color: #F0F2F5;
-    padding-top: 30px;
+    padding-top: 20px;
 }
 
 .homeLeft {
@@ -8,9 +8,24 @@
 }
 
 .homeFeed {
-    padding: 0px 50px;
+    padding: 0px 80px;
 }
 
 .homeRight {
     padding: 0px 15px;
+}
+
+
+
+
+/* For Mobile view */
+
+@media only screen and (max-width: 600px){
+    .homeFeed {
+        padding: 30px 20px;
+    }
+
+    .homeRight {
+        padding: 0px 30px;
+    }
 }
