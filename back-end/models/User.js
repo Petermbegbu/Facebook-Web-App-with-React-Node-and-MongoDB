@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        min: 3,
+        minlength: [3, "Minimum length of username is 3 characters"],
         max: 15,
         unique: true
     },
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        min: 6
+        minlength: [6, "Minimum length of password is 6 characters"]
     },
 
     profilePicture: {
@@ -48,6 +48,26 @@ const UserSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+
+    description: {
+        type: String,
+        default: ""
+    },
+
+    city: {
+        type: String,
+        default: ""
+    },
+
+    country: {
+        type: String,
+        default: ""
+    },
+
+    relationship: {
+        type: Number,
+        enum: [1, 2, 3]
     }
 
 }, {timestamps: true})
