@@ -1,12 +1,14 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const Users = require("../models/User");
 
 module.exports.updateUser = async (req, res) => {
     const id = req.params.id;
     const {userId} = req.body;
     let {password} = req.body;
+    let (isAdmin) = req.user;
+ 
 
-    if(id === userId) {
+    if(id === userId || isAdmin) {
         try {
             if(password){
                 const salt = await bcrypt.genSalt(10);
@@ -17,7 +19,7 @@ module.exports.updateUser = async (req, res) => {
             req.body.password = password;
 
             //update the database
-            const user = await User.findByIdAndUpdate(id, {$set: req.body}, { runValidators: true }); 
+            const user = await Users.findByIdAndUpdate(id, {$set: req.body}, { runValidators: true }); 
             //Note runValidators:true enables the model schema restrictions like minlength, maxlength etc. 
 
             res.status(200).send("Account has been created!!");
@@ -39,7 +41,7 @@ module.exports.deleteUser = async (req, res) => {
 
     if(id === userId) {
         try{
-            await User.findByIdAndDelete(id);
+            await Users.findByIdAndDelete(id);
             res.status(200).send("Account has been deleted");
         } catch (err) {
             res.status(500).json(err);
@@ -55,7 +57,7 @@ module.exports.getUser = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const user = await User.findById(id)
+        const user = await Users.findById(id)
             .select("-password -createdAt -updatedAt") //Excludes the fields from the selection
         
         res.status(200).json(user);
@@ -71,8 +73,8 @@ module.exports.follow = async (req, res) => {
 
     if (id !== userId) {
         try {
-            const anotherUser = await User.findById(id);      //get the user you want to follow
-            const currentUser = await User.findById(userId);  //get the current user
+            const anotherUser = await Users.findById(id);      //get the user you want to follow
+            const currentUser = await Users.findById(userId);  //get the current user
 
             //check to see if you are already following the user you want to follow
             if(currentUser.followings.includes(id) && anotherUser.followers.includes(userId)) {
@@ -99,8 +101,8 @@ module.exports.unfollow = async (req, res) => {
 
     if (id !== userId) {
         try {
-            const anotherUser = await User.findById(id);      //get the user you want to unfollow
-            const currentUser = await User.findById(userId);  //get the current user
+            const anotherUser = await Users.findById(id);      //get the user you want to unfollow
+            const currentUser = await Users.findById(userId);  //get the current user
 
             //check to see if you are following the user
             if(currentUser.followings.includes(id) && anotherUser.followers.includes(userId)) {

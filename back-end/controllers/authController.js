@@ -9,7 +9,7 @@ module.exports.signup = async (req, res) => {
         const user = await User.create(req.body);
         //Note that i used userSchema.pre() to hash the password before saving to the database.
 
-        res.status(200).send(user);
+        res.status(200).json(user);
     } catch (err) {
         //Return error message
         res.status(500).json(err);
