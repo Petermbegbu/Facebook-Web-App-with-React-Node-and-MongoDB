@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {MoreVert, ThumbUp, Favorite} from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import {format} from "timeago.js";
+import axios from "axios";
 
-import { Users } from '../../dummyData';
 import "./Post.css";
 
 
 
 export default function Post({post}) {
   
-  //Getting the username
-  const user = Users.filter(user => user.id === post.id)
-  const {username, profilePicture} = user[0];
-
-  const [like, setLike] = useState(post.like);
+  //set like or dislike
+  const [like, setLike] = useState(post.likes.length);
   const [isLike, setIsLike] = useState(false);
+
+  //set user from Database
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/api/user/get/${post._userId}`);
+
+      setUser(res.data);
+    }
+
+    fetchUser();
+  }, [post._userId])
+
 
   const likeHandler = () => {
     setLike(isLike? like - 1 : like + 1);
@@ -25,9 +38,12 @@ export default function Post({post}) {
       <div className="postWrapper">
         <div className="postTop">
             <div className="postTopLeft">
-                <img src={profilePicture} alt="" className="postProfileImg" />
-                <span className="postUsername">{username}</span>
-                <span className="postDate">{post.date}</span>
+              <Link to={`/profile/${user.username}/${user._id}`}>
+                <img src={user.profilePicture || "/images/persons/emptyProfileImage.jpg"} 
+                  alt="" className="postProfileImg" />
+              </Link>
+              <span className="postUsername">{user.username}</span>
+              <span className="postDate">{format(post.createdAt)}</span>
             </div>
             <div className="postTopRight">
                 <MoreVert />
@@ -35,7 +51,7 @@ export default function Post({post}) {
         </div>
         <div className="postCenter">
             <span className="postText">{post.desc}</span>
-            <img src={post.photo} alt="" className="postImg" />
+            <img src={post.img} alt="" className="postImg" />
         </div>
         <div className="postBottom">
             <div className="postBottomLeft">
@@ -44,7 +60,7 @@ export default function Post({post}) {
                 <span className="postLikeCounter">{like}</span>
             </div>
             <div className="postBottomRight">
-                <span className="postCommentText">{post.comment} Comments</span>
+                <span className="postCommentText">Comments</span>
             </div>
         </div>
       </div>

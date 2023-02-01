@@ -7,6 +7,9 @@ import TopBar from "../../components/TopBar/TopBar";
 import "./Home.css";
 
 function Home() {
+
+  
+
   return (
     <div>
       <TopBar />

@@ -1,13 +1,15 @@
 const router = require("express").Router();
 
-const {createPost, updatePost, deletePost, likePost, getPost, getTimelinePosts} = require("../controllers/postController");
+const {createPost, updatePost, deletePost, likePost, getPost, getTimelinePosts, getUserPosts} = require("../controllers/postController");
 
 
 router.post("/create", createPost);
 
 router.get("/get/:id", getPost);
 
-router.get("/get/all/timeline", getTimelinePosts);
+router.get("/get/timeline/:id", getTimelinePosts);
+
+router.get("/get/profile/:id", getUserPosts);
 
 router.put("/update/:id", updatePost);
 

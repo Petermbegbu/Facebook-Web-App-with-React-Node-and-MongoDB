@@ -79,3 +79,8 @@
     font-weight: 500;
     cursor: pointer;
 }
+
+.errMessage {
+    color: red;
+    text-align: center;
+}

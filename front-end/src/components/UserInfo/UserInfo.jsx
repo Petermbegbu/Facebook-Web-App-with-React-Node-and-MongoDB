@@ -6,7 +6,7 @@ import "./UserInfo.css";
 
 
 
-export default function UserInfo() {
+export default function UserInfo({user}) {
   return (
     <div>
       <div className='userInfoItemBlock'>
@@ -14,11 +14,11 @@ export default function UserInfo() {
 
         <div className='userInfoItem'>
             <span className="userInfoKey">City:</span>
-            <span className="userInfoValue">Middlesbrough</span>
+            <span className="userInfoValue">{user.city}</span>
         </div>
         <div className='userInfoItem'>
             <span className="userInfoKey">From:</span>
-            <span className="userInfoValue">Nigeria</span>
+            <span className="userInfoValue">{user.country}</span>
         </div>
         <div className='userInfoItem'>
             <span className="userInfoKey">Relationship:</span>
@@ -31,7 +31,7 @@ export default function UserInfo() {
 
         <div className='userFriends'>
             {
-                Users.map(user => <UserFriends user={user} />)
+                Users.map(user => <UserFriends key={user.id} user={user} />)
             }
         </div>
       </div>

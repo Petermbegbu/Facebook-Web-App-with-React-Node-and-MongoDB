@@ -1,5 +1,7 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 import {Search, Person, Chat, Notifications} from '@mui/icons-material';
+
 import "./TopBar.css";
 
 export default function TopBar() {
@@ -8,7 +10,9 @@ export default function TopBar() {
 
         {/* Topbar left */}
       <div className='topbarLeft'>
-        <span className="logo">Chestbook</span>
+        <Link to="/" className='logoLink'>
+          <span className="logo">Chestbook</span>
+        </Link>
       </div>
 
         {/* Topbar Center */}

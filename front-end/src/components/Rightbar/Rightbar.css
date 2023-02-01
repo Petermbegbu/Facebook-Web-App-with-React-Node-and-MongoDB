@@ -2,6 +2,7 @@
 .rightbarBody {
     height: cal(100vh - 50px);
     overflow-y: scroll;
+    
 }
 
 .birthdayDiv {

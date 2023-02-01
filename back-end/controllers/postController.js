@@ -32,10 +32,10 @@ module.exports.getPost = async (req, res) => {
 module.exports.getTimelinePosts = async (req, res) => {
     //What we want to do right here is to concatenate all current user posts and all followed friends posts
 
-    const {_userId} = req.body;
+    const {id} = req.params;
 
     try {
-        const currentUser = await Users.findById(_userId);
+        const currentUser = await Users.findById(id);
 
         const currentUserPosts = await Posts.find({_userId: currentUser._id});  //All posts for the current user
 
@@ -44,10 +44,30 @@ module.exports.getTimelinePosts = async (req, res) => {
                 return Posts.find({_userId: friendId});
             })    
         ); //All followed friends posts. Note we use Promise.all because we have more than one promise in the map loop
+        
+        const editedFriendPosts = friendsPosts.map(friendpost => friendpost[0]); //Extracting the array of arrays
 
-        const timelinePosts = [...currentUserPosts, ...friendsPosts];
+        const timelinePosts = [...currentUserPosts, ...editedFriendPosts];
 
         res.status(200).json(timelinePosts);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
+//Get all user posts
+module.exports.getUserPosts = async (req, res) => {
+    //We want to get only the user posts
+
+    const {id} = req.params;
+
+    try {
+        const currentUser = await Users.findById(id);
+
+        const currentUserPosts = await Posts.find({_userId: currentUser._id});  //All posts for the current user
+
+        res.status(200).json(currentUserPosts);
     } catch (err) {
         res.status(500).json(err);
     }

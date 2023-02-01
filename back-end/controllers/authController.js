@@ -30,12 +30,12 @@ module.exports.signin = async (req, res) => {
             const passwordValid = await bcrypt.compare(password, user.password); //This returns true of false
 
             if(passwordValid){
-                res.json(user);
+                res.status(200).json(user);
             } else {
-                res.status(404).send("Wrong Password!!");
+                res.status(404).json("Wrong Password!!");
             }
         } else {
-            res.status(404).send("User not found!!");
+            res.status(404).json("User not found!!");
         }
 
     } catch (err) {

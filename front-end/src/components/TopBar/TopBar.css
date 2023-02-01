@@ -33,6 +33,10 @@
     color: white;
 }
 
+.logoLink {
+    text-decoration: none;
+}
+
 .searchDiv {
     width: 100%;
     height: 30px;
