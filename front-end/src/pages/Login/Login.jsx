@@ -20,7 +20,7 @@ const Login = (props) => {
 
 
 
-  const handleClick = async (e) => {
+  const handleLoginClick = async (e) => {
     e.preventDefault(); //To stop the default behavior of the submit button, by not refreshing the page
     
     const userCredentials = {
@@ -33,7 +33,7 @@ const Login = (props) => {
     setIsValid(validate);
 
     if(validate) {
-      loginAction(userCredentials);
+      await loginAction(userCredentials);
     } 
 
   }
@@ -45,7 +45,7 @@ const Login = (props) => {
 
         <div className='col-md-6 logoBar'>
             <div>
-                <p className='loginLogo'>Chestbook</p>
+                <p className='loginLogo'>PUM</p>
                 <span className='loginDesc'>Connect with friends and the world around you on Chestbook</span>
             </div>
         </div>
@@ -61,7 +61,7 @@ const Login = (props) => {
 
                 <input type="email" className="form-control" placeholder="Email"  ref={email}/>
                 <input type="password" className="form-control" placeholder="Password" ref={password}/>
-                <button className='btn loginBtn' onClick={handleClick}>
+                <button className='btn loginBtn' onClick={handleLoginClick}>
                   {isFetching ? <CircularProgress color="success" size="20px"/> : "Login"}
                 </button>
 

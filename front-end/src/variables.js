@@ -1,0 +1,1 @@
+export const EMPTY_IMAGE_PATH = "/images/persons/emptyProfileImage.jpg";

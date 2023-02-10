@@ -40,5 +40,9 @@
 .userFriends {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+}
+
+.followBtn {
+    margin-bottom: 20px;
+    font-weight: bold;
 }

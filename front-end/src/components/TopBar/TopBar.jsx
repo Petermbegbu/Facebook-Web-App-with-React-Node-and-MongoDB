@@ -1,17 +1,23 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import {Search, Person, Chat, Notifications} from '@mui/icons-material';
+import { connect } from 'react-redux';
+import { EMPTY_IMAGE_PATH } from '../../variables';
 
 import "./TopBar.css";
 
-export default function TopBar() {
+
+ const TopBar = (props) => {
+  const {user} = props;
+
+
   return (
     <div className='topbarContainer'>
 
-        {/* Topbar left */}
+      {/* Topbar left */}
       <div className='topbarLeft'>
         <Link to="/" className='logoLink'>
-          <span className="logo">Chestbook</span>
+          <span className="logo">PUM</span>
         </Link>
       </div>
 
@@ -46,9 +52,24 @@ export default function TopBar() {
             </div>
         </div>
 
-        <img src="/images/persons/profile1.jpg" alt="" className="topbarImg" />
+        <Link to={`/profile/${user.username}/${user._id}`}>
+          <img src={user.profilePicture ? user.profilePicture : EMPTY_IMAGE_PATH} 
+            alt="" className="topbarImg" />
+        </Link>
       </div>
 
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  const {auth} = state;
+
+  return {
+    user: auth.user,
+  }
+}
+
+
+export default connect(mapStateToProps)(TopBar);

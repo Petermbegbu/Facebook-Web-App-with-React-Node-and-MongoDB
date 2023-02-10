@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
-const {createPost, updatePost, deletePost, likePost, getPost, getTimelinePosts, getUserPosts} = require("../controllers/postController");
+const {createPost, updatePost, deletePost, likePost, getPost, getTimelinePosts, 
+    getUserPosts, getPostImage} = require("../controllers/postController");
 
 
 router.post("/create", createPost);
@@ -15,7 +16,9 @@ router.put("/update/:id", updatePost);
 
 router.delete("/delete/:id", deletePost);
 
-router.put("/like/:id", likePost);
+router.patch("/like/:id", likePost);
+
+router.get("/image/:id", getPostImage)
 
 
 

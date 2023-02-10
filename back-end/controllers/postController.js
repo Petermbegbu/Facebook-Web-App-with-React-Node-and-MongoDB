@@ -1,15 +1,38 @@
 const Posts = require("../models/Post");
 const Users = require("../models/User");
+const formidable = require("formidable");
+const fs = require("fs");
+
 
 //create a post
 module.exports.createPost = async (req, res) => {
-    try {
-        const post = await Posts.create(req.body);
+    let form = new formidable.IncomingForm();
+    form.keepExtensions = true;
 
-        res.status(200).json(post);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+    form.parse(req, (error, fields, files) => {
+        if(error) {
+            //const errorMessages = handleProductErrors(error)
+            res.status(500).json({error});        
+        }
+
+        const post = new Posts(fields);
+
+        if(files.img){
+            post.img.data = fs.readFileSync(files.img.filepath);
+            post.img.contentType = files.img.mimetype;
+        }
+
+        post.save((error, post) => {
+            if(error){
+                //const errorMessages = handleProductErrors(error)
+                res.status(500).json({error});    
+            }
+
+            res.status(200).json({post});
+        });
+
+    })
+
 }
 
 
@@ -135,5 +158,21 @@ module.exports.likePost = async (req, res) => {
 
     } catch (err) {
         res.status(500).json(err);
+    }
+}
+
+
+module.exports.getPostImage = async (req, res) => {
+    const {id} = req.params;
+
+    try {
+        const post = await Posts.findById(id)
+
+        if(post.img.data){
+            res.set("Content-Type", post.img.contentType);
+            res.send(post.img.data);
+        }
+    } catch(error){
+        res.status(500).json({error});
     }
 }

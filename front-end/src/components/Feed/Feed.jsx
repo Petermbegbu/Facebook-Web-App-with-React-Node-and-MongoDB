@@ -1,34 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux';
 
 import Share from '../Share/Share';
 import Post from '../Post/Post';
+import { getProfilePostsAction, getTimelinePostsAction } from '../../redux/actionCreators/postCreators';
 import "./Feed.css";
 
-export default function Feed({userID, profile}) {
-  const [posts, setPosts] = useState([]); 
+
+const Feed = (props) => {
+  const {profile, user, currentUser, timelinePosts, profilePosts, getProfilePostsAction, getTimelinePostsAction} = props;
+
+  const posts = profile ? profilePosts : timelinePosts;
+    
+  //Sort post according to date posted. The newest post must be on top of the list
+  posts.sort((post1, post2) => {
+    return new Date(post2.createdAt) - new Date(post1.createdAt);
+  })
 
 
   useEffect(() => {
-    const fetchPost = async () => {
-
-      if (userID) {
-        const res = profile
-        ? await axios.get(`/api/post/get/profile/${userID}`) 
-        : await axios.get(`/api/post/get/timeline/${userID}`);
-      
-        setPosts(res.data);
-      }
-      
+    const getPosts = async () => {
+      profile 
+        ? await getProfilePostsAction(user._id) 
+        : await getTimelinePostsAction(user._id);
     }
 
-    fetchPost();
-  }, [userID])
+    getPosts();
+  }, [user._id])
+
 
   return (
     <div className='feedBody'>
       <div className="feedWrapper">
-        <Share />
+        { currentUser._id === user._id && <Share />}
 
         {/* render posts */}
         {
@@ -39,3 +43,18 @@ export default function Feed({userID, profile}) {
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  const {posts, auth} = state;
+
+  return {
+    profilePosts: posts.profilePosts,
+    timelinePosts: posts.timelinePosts,
+    currentUser: auth.user
+  }
+}
+
+
+export default connect(mapStateToProps, 
+  {getProfilePostsAction, getTimelinePostsAction})(Feed);

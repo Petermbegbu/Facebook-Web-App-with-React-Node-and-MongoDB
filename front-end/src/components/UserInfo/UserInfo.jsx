@@ -1,14 +1,57 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
+import { followAction, unFollowAction } from '../../redux/actionCreators/authCreators';
 import UserFriends from '../UserFriends/UserFriends';
-import { Users } from '../../dummyData';
 import "./UserInfo.css";
 
 
 
-export default function UserInfo({user}) {
+const UserInfo = (props) => {
+  const {user, currentUser, followAction, unFollowAction} = props;
+
+  const [friends, setFriends] = useState([]);
+  const [followed, setFollowed] = useState(false);
+
+
+  useEffect(() => {
+    setFollowed(currentUser.followings.includes(user._id))
+  }, [currentUser.followings, user._id])
+
+
+  useEffect(() => {
+    const getFollowings = async () => {
+      const res = await axios.get(`/api/user/followings/${user._id}`);
+
+      setFriends(res.data);
+    }
+
+    getFollowings();
+  }, [user._id])
+
+
+  const handleFollowClick = async () => {
+    if (followed) {
+      await unFollowAction(user._id);
+    } else {
+      await followAction(user._id);
+    }
+
+    setFollowed(!followed);
+  }
+
+
   return (
     <div>
+      {/* Display follow button only if we are not on the current user page */}
+      {
+        user._id !== currentUser._id && 
+        (<div className='btn btn-primary followBtn' onClick={handleFollowClick}>
+          {followed ? "Unfollow -" : "Follow +"} 
+        </div>)
+      }
+
       <div className='userInfoItemBlock'>
         <h5 className='userInfoTitle'>User Information</h5>
 
@@ -31,7 +74,7 @@ export default function UserInfo({user}) {
 
         <div className='userFriends'>
             {
-                Users.map(user => <UserFriends key={user.id} user={user} />)
+              friends.map(friend => <UserFriends key={friend._id} friend={friend} />)
             }
         </div>
       </div>
@@ -39,3 +82,16 @@ export default function UserInfo({user}) {
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  const {auth} = state;
+
+  return {
+    currentUser: auth.user
+  }
+}
+ 
+
+
+export default connect(mapStateToProps, {followAction, unFollowAction})(UserInfo);

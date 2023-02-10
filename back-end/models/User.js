@@ -28,13 +28,13 @@ const UserSchema = new mongoose.Schema({
     },
 
     profilePicture: {
-        type: String,
-        default: ""
+        contentType: String,
+        data: Buffer
     },
 
     coverPicture: {
-        type: String,
-        default: ""
+        contentType: String,
+        data: Buffer
     },
 
     followers: {

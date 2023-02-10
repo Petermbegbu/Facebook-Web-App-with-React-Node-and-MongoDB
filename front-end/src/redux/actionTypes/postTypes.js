@@ -1,0 +1,2 @@
+export const PROFILE_POSTS = "PROFILE_POSTS";
+export const TIMELINE_POSTS = "TIMELINE_POSTS";
