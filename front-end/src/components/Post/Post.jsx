@@ -62,9 +62,10 @@ const Post = (props) => {
             </div>
         </div>
         <div className="postCenter">
-          <span className="postText">{post.desc}</span>
-          <img src="" alt="" className="postImg" />
-          {/* <img src={`/api/post/image/${post._id}`} alt="" className="postImg" /> */}
+          <div className="postText">{post.desc}</div>
+          <div className='postImgDiv'>
+            <img src={post.img.url} alt="" className="postImg" />
+          </div>
         </div>
         <div className="postBottom">
             <div className="postBottomLeft">

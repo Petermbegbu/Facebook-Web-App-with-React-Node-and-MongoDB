@@ -14,7 +14,7 @@ const Feed = (props) => {
     
   //Sort post according to date posted. The newest post must be on top of the list
   posts.sort((post1, post2) => {
-    return new Date(post2.createdAt) - new Date(post1.createdAt);
+    return post1 && post2 && new Date(post2.createdAt) - new Date(post1.createdAt);
   })
 
 
@@ -36,7 +36,7 @@ const Feed = (props) => {
 
         {/* render posts */}
         {
-          posts.map( post => <Post key={post._id} post={post} />)
+          posts.map(post => post && <Post key={post._id} post={post} />)
         }
        
       </div>

@@ -5,18 +5,22 @@ const cloudinary = require("../utils/cloudinary");
 
 //create a post
 module.exports.createPost = async (req, res) => {
-    const {_userId, desc, img} = req.body;
+    const {img} = req.body;
 
     try {
         const cloudResponse = await cloudinary.uploader.upload(img, {
-            public_id: "postImages"
+            folder: "postImages"
         });
-    
-        console.log(cloudResponse);
-    
-        //const post = new Posts.create({})
+        
+        const post = await Posts.create({
+            ...req.body, 
+            img: {
+                public_id: cloudResponse.public_id,
+                url: cloudResponse.secure_url
+            }
+        })
 
-        //res.status(200)
+        res.status(200).json(post);
     } catch (err) {
         console.log(err)
     }

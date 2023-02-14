@@ -38,16 +38,19 @@
     margin: 20px 0px;
 }
 
-.postImg {
+.postImgDiv {
     width: 100%;
     height: 450px;
-    max-height: 450px;
-    margin-top: 20px;
-    object-fit: cover;
+}
+
+.postImg {
+    width: 100%;
+    height: 100%;
 }
 
 .postText {
     font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .postBottom {
