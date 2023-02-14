@@ -27,6 +27,7 @@ export const loginAction = (userCredentials) => {
 export const getCurrentUserAction = (userID) => {
     return async (dispatch) => {
         try{
+            console.log("userID", userID);
             const res = await axios.get(`/api/user/get/${userID}`);
 
             dispatch({type: GET_CURRENT_USER, payload: res.data});
@@ -60,6 +61,21 @@ export const unFollowAction = (friendId) => {
             await axios.put(`/api/user/unfollow/${friendId}`, {userId: currentUser._id});
 
             dispatch({type: UNFOLLOW, payload: friendId})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+
+export const logoutAction = () => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get("/api/auth/logout");
+
+            if (res.data.message) {
+                dispatch({type: LOG_OUT, payload: null})
+            }
         } catch (err) {
             console.log(err)
         }

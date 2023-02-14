@@ -10,32 +10,44 @@ import "./Share.css";
 const Share = (props) => {
   const {user} = props;
 
-  const [file, setFile] = useState(null);
+  const [fileSource, setFileSource] = useState("");
   const desc = useRef();
 
 
   const handleFileChange = (e) => {
+    const file = e.target.files[0];
 
-    setFile(e.target.files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setFileSource(reader.result)
+    }
+
   }
-  
+
 
   const handleShare = async () => {
-  
-    const formData = new FormData();
 
-    formData.append("_userId", user._id);
-    formData.append("desc", desc.current.value);
-    formData.append("img", file);
+    if(!desc.current.value && !fileSource) {
+      window.alert("Add a text or Photo")
+
+      return
+    }
+
+    const data = {
+      _userId: user._id,
+      desc: desc.current.value,
+      img: fileSource
+    }
 
     try {
-      await axios.post("/api/post/create", formData);
+      await axios.post("/api/post/create", data);
 
       window.location.reload();
     } catch (err) {
       console.log(err);
     }
-
+    
   }
 
 
@@ -51,10 +63,10 @@ const Share = (props) => {
         <hr className='shareHr'/>
 
         {
-          file && (
+          fileSource && (
             <div className='shareImgContainer'>
-              <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
-              <Cancel className='cancelImg' onClick={() => setFile(null)} />
+              <img src={fileSource} alt="" className="shareImg" />
+              <Cancel className='cancelImg' onClick={() => setFileSource("")} />
             </div>
           )
         }

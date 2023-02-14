@@ -1,37 +1,25 @@
 const Posts = require("../models/Post");
 const Users = require("../models/User");
-const formidable = require("formidable");
-const fs = require("fs");
+const cloudinary = require("../utils/cloudinary");
 
 
 //create a post
 module.exports.createPost = async (req, res) => {
-    let form = new formidable.IncomingForm();
-    form.keepExtensions = true;
+    const {_userId, desc, img} = req.body;
 
-    form.parse(req, (error, fields, files) => {
-        if(error) {
-            //const errorMessages = handleProductErrors(error)
-            res.status(500).json({error});        
-        }
-
-        const post = new Posts(fields);
-
-        if(files.img){
-            post.img.data = fs.readFileSync(files.img.filepath);
-            post.img.contentType = files.img.mimetype;
-        }
-
-        post.save((error, post) => {
-            if(error){
-                //const errorMessages = handleProductErrors(error)
-                res.status(500).json({error});    
-            }
-
-            res.status(200).json({post});
+    try {
+        const cloudResponse = await cloudinary.uploader.upload(img, {
+            public_id: "postImages"
         });
+    
+        console.log(cloudResponse);
+    
+        //const post = new Posts.create({})
 
-    })
+        //res.status(200)
+    } catch (err) {
+        console.log(err)
+    }
 
 }
 

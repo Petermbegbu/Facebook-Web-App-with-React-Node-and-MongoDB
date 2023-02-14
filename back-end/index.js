@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const authRoute = require("./routes/authRoute");
@@ -12,9 +13,10 @@ const postRoute = require("./routes/postRoute");
 require("./database/mongodbConnect")
 
 //Middlewares
-app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
+app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);

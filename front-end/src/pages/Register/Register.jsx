@@ -11,7 +11,6 @@ export default function Register() {
   const [isValid, setIsValid] = useState(true);
   const [pwdMessage, setPwdMessage] = useState("");
   
-  const navigate = useNavigate();
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -47,7 +46,7 @@ export default function Register() {
         console.log(res);
 
         //programmatic navigation to login page
-        navigate("/login");
+        useNavigate("/login");
       } catch (err) {
         console.log(err);
       }

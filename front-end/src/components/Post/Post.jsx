@@ -45,6 +45,7 @@ const Post = (props) => {
     setIsLike(!isLike);
   }
 
+
   return (
     <div className='post'>
       <div className="postWrapper">
@@ -61,8 +62,9 @@ const Post = (props) => {
             </div>
         </div>
         <div className="postCenter">
-            <span className="postText">{post.desc}</span>
-            <img src={`/api/post/image/${post._id}`} alt="" className="postImg" />
+          <span className="postText">{post.desc}</span>
+          <img src="" alt="" className="postImg" />
+          {/* <img src={`/api/post/image/${post._id}`} alt="" className="postImg" /> */}
         </div>
         <div className="postBottom">
             <div className="postBottomLeft">

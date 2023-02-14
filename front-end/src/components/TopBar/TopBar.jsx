@@ -1,28 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom"
 import {Search, Person, Chat, Notifications} from '@mui/icons-material';
 import { connect } from 'react-redux';
-import { EMPTY_IMAGE_PATH } from '../../variables';
 
+import { logoutAction } from '../../redux/actionCreators/authCreators';
+import { EMPTY_IMAGE_PATH } from '../../variables';
 import "./TopBar.css";
 
 
  const TopBar = (props) => {
-  const {user} = props;
+  const {user, logoutAction} = props;
+
+  const [open, setOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logoutAction();
+  }
+
+  window.addEventListener("click", () => {
+    setOpen(false);
+  })
+
+
+  const handleMouseOver = () => {
+    setOpen(true);
+  }
+
+  const handleMouseLeave = () => {
+    setOpen(false);
+  }
 
 
   return (
-    <div className='topbarContainer'>
+    <div className='topbarContainer sticky-top row'>
 
       {/* Topbar left */}
-      <div className='topbarLeft'>
+      <div className='topbarLeft col-md-4 py-2'>
         <Link to="/" className='logoLink'>
           <span className="logo">PUM</span>
         </Link>
       </div>
 
         {/* Topbar Center */}
-      <div className='topbarCenter'>
+      <div className='topbarCenter col-md-4 py-2'>
         <div className="searchDiv">
             <Search className='searchIcon'/>
             <input placeholder='Search for friends, post or videos' type="text" className="searchInput" />
@@ -30,12 +50,7 @@ import "./TopBar.css";
       </div>
 
         {/* Topbar Right */}
-      <div className='topbarRight'>
-
-        <div className="topbarLinkDiv">
-            <span className="topbarLink">Home</span>
-            <span className="topbarLink">Timeline</span>
-        </div>
+      <div className='topbarRight col-md-4 py-2'>
 
         <div className="topbarIcons">
             <div className='topbarIconItem'>
@@ -52,10 +67,24 @@ import "./TopBar.css";
             </div>
         </div>
 
-        <Link to={`/profile/${user.username}/${user._id}`}>
+        <div className='imgDropdown'>
           <img src={user.profilePicture ? user.profilePicture : EMPTY_IMAGE_PATH} 
-            alt="" className="topbarImg" />
-        </Link>
+            alt="" className="topbarImg" onMouseOver={handleMouseOver} />
+
+          {
+            open && (
+              <ul className='menuDiv' onMouseLeave={handleMouseLeave}>
+                <li><Link to={"/"} className='dropdownLink'>Timeline</Link></li>
+                <li><Link to={`/profile/${user.username}/${user._id}`} className='dropdownLink'>Profile</Link></li>
+                <li><hr className='dropdownHr'/></li>
+                <li><span className="dropdownLink" onClick={handleLogout}>Logout</span></li>
+              </ul>
+            )
+          }
+          
+        </div>
+        
+          
       </div>
 
     </div>
@@ -72,4 +101,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(TopBar);
+export default connect(mapStateToProps, {logoutAction})(TopBar);

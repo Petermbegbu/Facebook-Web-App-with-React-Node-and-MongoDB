@@ -17,6 +17,9 @@
 
 .userFriendName {
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.friendsLink {
     text-decoration: none;
 }
