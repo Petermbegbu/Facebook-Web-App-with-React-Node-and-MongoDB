@@ -1,0 +1,35 @@
+
+.messengerBlock {
+    height: calc(100vh - 56px);
+    margin: 0;
+}
+
+.chatUniform {
+    height: 100%;
+    padding: 10px 10px 10px 0px;
+}
+
+.chatBoxTop {
+    height: 75vh;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+
+.chatBoxBottom {
+    background-color: rgb(221, 221, 147);
+    padding: 10px;
+    display: flex;
+    margin-top: 15px;
+
+}
+
+.chatInput{
+    display: inline-block;
+    height: 50px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid gray;
+    padding: 20px 5px 0px 5px;
+    outline: none;
+    
+}

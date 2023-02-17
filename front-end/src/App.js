@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Messenger from "./pages/Messenger/Messenger";
 import Home from "./pages/home/Home";
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App(props) {
         <Route exact path="/profile/:username/:userID" element={<Profile />} />
         <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
         <Route exact path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
+        <Route exact path="/messenger" element={<Messenger />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,24 @@
+.chatListProfileImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.chatListText {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.chatListItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 10px 10px;
+}
+
+.chatListItem:hover {
+    background-color: #E4E6E9;
+}

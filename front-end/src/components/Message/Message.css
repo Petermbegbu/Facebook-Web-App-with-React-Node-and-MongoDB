@@ -1,0 +1,38 @@
+.messageBox {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px 10px;
+    background-color: #E4E6E9;
+    margin-bottom: 15px;
+}
+
+.messageBox.mine {
+    color: white;
+    background-color: #1877F2;
+}
+
+
+.messageImg {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.messageText {
+    font-size: 14px;
+}
+
+.messageTop {
+    display: flex;
+}
+
+.messageBottom {
+    text-align: right;
+}
+
+.messageTime {
+    font-size: 12px;
+}
+

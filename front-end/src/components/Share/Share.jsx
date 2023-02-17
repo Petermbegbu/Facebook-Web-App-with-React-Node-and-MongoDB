@@ -5,6 +5,7 @@ import {PermMedia, LocationOn, EmojiEmotions, Cancel} from '@mui/icons-material'
 
 import { EMPTY_IMAGE_PATH } from '../../variables';
 import "./Share.css";
+import { Link } from 'react-router-dom';
 
 
 const Share = (props) => {
@@ -55,8 +56,10 @@ const Share = (props) => {
     <div className='shareBody'>
       <div className="shareWrapper">
         <div className="shareTop">
+          <Link to={`/profile/${user.username}/${user._id}`}>
             <img src={user.profilePicture || EMPTY_IMAGE_PATH} alt="profileImg" className="shareProfileImg" />
-            <input type="text" className="shareInput" ref={desc} 
+          </Link>
+          <input type="text" className="shareInput" ref={desc} 
               placeholder={`What's on your mind, ${user.username}?`} />
         </div>
 

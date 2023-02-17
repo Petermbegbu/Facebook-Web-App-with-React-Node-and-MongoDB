@@ -51,10 +51,10 @@ const Post = (props) => {
       <div className="postWrapper">
         <div className="postTop">
             <div className="postTopLeft">
-              <Link to={`/profile/${user.username}/${user._id}`}>
+              <Link to={`/profile/${user.username}/${user._id}`} className="postProfileLink">
                 <img src={user.profilePicture || EMPTY_IMAGE_PATH} alt="" className="postProfileImg" />
+                <span className="postUsername">{user.username}</span>
               </Link>
-              <span className="postUsername">{user.username}</span>
               <span className="postDate">{format(post.createdAt)}</span>
             </div>
             <div className="postTopRight">

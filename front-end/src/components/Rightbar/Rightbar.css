@@ -1,7 +1,7 @@
 
 .rightbarBody {
     height: cal(100vh - 50px);
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     
 }
 
