@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const Users = require("../models/User");
 
+
 module.exports.updateUser = async (req, res) => {
     const id = req.params.id;
     const {userId} = req.body;
