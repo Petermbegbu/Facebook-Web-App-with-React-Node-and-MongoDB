@@ -12,7 +12,7 @@ const Home = (props) => {
   
 
   return (
-    <div>
+    <div className="homeContainer">
       <TopBar />
       
       <div className="homeBody row">

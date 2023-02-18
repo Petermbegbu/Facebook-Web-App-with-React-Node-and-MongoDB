@@ -1,9 +1,10 @@
 import React from 'react'
+import {NearMe} from '@mui/icons-material';
 
 import ChatList from '../../components/ChatList/ChatList';
 import TopBar from '../../components/TopBar/TopBar';
 import Message from '../../components/Message/Message';
-import {NearMe} from '@mui/icons-material';
+import ChatOnline from '../../components/ChatOnline/ChatOnline';
 import "./Messenger.css";
 
 export default function Messenger() {
@@ -47,7 +48,14 @@ export default function Messenger() {
 
         <div className="chatOnline col-md-3">
           <div className="chatOnlineWrapper chatUniform">
-            right
+            <div className='onlineTitleDiv'>
+              <span className='onlineTitle'>Online Friends</span>
+            </div>
+
+            <ChatOnline />
+            <ChatOnline />
+            <ChatOnline />
+            <ChatOnline />
           </div>
         </div>
       </div>

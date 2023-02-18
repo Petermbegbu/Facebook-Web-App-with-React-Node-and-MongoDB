@@ -13,15 +13,18 @@ function App(props) {
   const {user} = props;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={ user ? <Home /> : <Navigate to="/login" /> } />
-        <Route exact path="/profile/:username/:userID" element={<Profile />} />
-        <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
-        <Route exact path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
-        <Route exact path="/messenger" element={<Messenger />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="appContainer">
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={ user ? <Home /> : <Navigate to="/login" /> } />
+          <Route exact path="/profile/:username/:userID" element={<Profile />} />
+          <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+          <Route exact path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
+          <Route exact path="/messenger" element={<Messenger />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+    
   )
 }
 

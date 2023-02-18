@@ -12,7 +12,8 @@
 .chatBoxTop {
     height: 75vh;
     overflow-y: scroll;
-    padding-right: 5px;
+    padding: 10px;
+    background-color: white;
 }
 
 .chatBoxBottom {
@@ -31,5 +32,15 @@
     border-bottom: 2px solid gray;
     padding: 20px 5px 0px 5px;
     outline: none;
-    
+}
+
+.onlineTitleDiv {
+    padding: 15px 0px 15px 2px;
+    border-bottom: 1px solid gray;
+}
+
+.onlineTitle {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 3px;
 }
