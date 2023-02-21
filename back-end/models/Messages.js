@@ -4,9 +4,9 @@ const {ObjectId} = mongoose.Schema.Types;
 
 
 const messageSChema = new mongoose.Schema({
-    _chatMemberId: {
+    _conversationId: {
         type: ObjectId,
-        ref: "chatMembers",
+        ref: "conversations",
         required: true
     },
 

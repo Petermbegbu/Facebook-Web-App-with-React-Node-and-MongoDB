@@ -9,7 +9,7 @@ const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const postRoute = require("./routes/postRoute");
 const messageRoute = require("./routes/messageRoute");
-const chatMemberRoute = require("./routes/chatMemberRoute");
+const conversationRoute = require("./routes/conversationRoute");
 
 
 //Database Connection
@@ -26,7 +26,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
 app.use("/api/message", messageRoute);
-app.use("/api/chatMember", chatMemberRoute);
+app.use("/api/conversation", conversationRoute);
 
 
 const PORT = process.env.PORT;

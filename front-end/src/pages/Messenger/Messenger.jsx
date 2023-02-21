@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {NearMe} from '@mui/icons-material';
+import { connect } from 'react-redux';
 
 import ChatList from '../../components/ChatList/ChatList';
 import TopBar from '../../components/TopBar/TopBar';
 import Message from '../../components/Message/Message';
 import ChatOnline from '../../components/ChatOnline/ChatOnline';
+import { getConversationsAction } from '../../redux/actionCreators/messengerCreators';
 import "./Messenger.css";
 
-export default function Messenger() {
+
+
+const Messenger = (props) => {
+  const {currentUser, conversations, getConversationsAction} = props;
+
+
+  useEffect(() => {
+    getConversationsAction(currentUser._id);
+  }, [currentUser._id])
+
+
   return (
     <div className='messenger'>
       <TopBar />
@@ -17,10 +29,12 @@ export default function Messenger() {
           <div className="chatMenuWrapper chatUniform">
             <input type="text" className='form-control' placeholder='Search for Friends'/>
 
-            <ChatList />
-            <ChatList />
-            <ChatList />
-            <ChatList />
+              {
+                conversations && conversations.map((c) => {
+                  return <ChatList key={c._id} conversation={c} currentUser={currentUser}/>
+                })
+              }
+        
           </div>
         </div>
 
@@ -39,7 +53,7 @@ export default function Messenger() {
             </div>
             <div className='chatBoxBottom'>
                 <input type="text" className="chatInput" placeholder="Type a message" />
-                <button class="btn btn-sm btn-primary">
+                <button className="btn btn-sm btn-primary">
                   <NearMe />
                 </button>
               </div>
@@ -62,3 +76,17 @@ export default function Messenger() {
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  const {auth, messenger} = state;
+
+  return {
+    currentUser : auth.user,
+    conversations: messenger.conversations
+  }
+}
+
+
+
+export default connect(mapStateToProps, {getConversationsAction})(Messenger);
