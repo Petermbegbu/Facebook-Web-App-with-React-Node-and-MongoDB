@@ -6,7 +6,7 @@ import "./ChatList.css";
 
 
 const ChatList = (props) => {
-  const {conversation, currentUser} = props;
+  const {conversation, currentUser, callBackFunc} = props;
 
   const [user, setUser] = useState(null);
 
@@ -26,12 +26,13 @@ const ChatList = (props) => {
 
 
   return (
-    <div className='chatListItem'>
+    <div className='chatListItem' onClick={() => callBackFunc(conversation)}>
       <img src={user && user.profilePicture.url ? user.profilePicture.url : EMPTY_IMAGE_PATH} 
         alt="" className="chatListProfileImg" />
       <span className="chatListText">{user && user.username}</span>
     </div>
   )
 }
+
 
 export default ChatList;

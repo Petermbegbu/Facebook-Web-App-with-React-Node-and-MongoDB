@@ -1,23 +1,65 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {NearMe} from '@mui/icons-material';
 import { connect } from 'react-redux';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import {io} from "socket.io-client";
 
 import ChatList from '../../components/ChatList/ChatList';
 import TopBar from '../../components/TopBar/TopBar';
 import Message from '../../components/Message/Message';
 import ChatOnline from '../../components/ChatOnline/ChatOnline';
-import { getConversationsAction } from '../../redux/actionCreators/messengerCreators';
+import { getConversationsAction, getMessagesAction,
+  postMessageAction } from '../../redux/actionCreators/messengerCreators';
 import "./Messenger.css";
 
 
 
 const Messenger = (props) => {
-  const {currentUser, conversations, getConversationsAction} = props;
+  const {currentUser, conversations, messages, getConversationsAction, 
+    getMessagesAction, postMessageAction} = props;
 
+  const [currentChat, setCurrentChat] = useState({});
+  const [socket, setSocket] = useState(null);
+
+  const newMessage = useRef();
+
+
+  useEffect(() => {
+    setSocket(io("ws://localhost:5000"))
+  }, [])
 
   useEffect(() => {
     getConversationsAction(currentUser._id);
   }, [currentUser._id])
+
+  useEffect(() => {
+    currentChat._id && getMessagesAction(currentChat._id);
+  }, [currentChat._id])
+
+
+  const handleChatListClick = (conversation) => {
+    setCurrentChat(conversation)
+  }
+
+
+  const handleSendClick = async () => {
+    const chatMessage = {
+      _senderId: currentUser._id,
+      _conversationId: currentChat._id,
+      text: newMessage.current.value
+    }
+
+    await postMessageAction(chatMessage);
+
+    newMessage.current.value = "";
+  }
+
+
+  const handleKeyUp = (e) => {
+    if(e.key === "Enter") {
+      handleSendClick();
+    }
+  }
 
 
   return (
@@ -28,32 +70,59 @@ const Messenger = (props) => {
         <div className="chatMenu col-md-3">
           <div className="chatMenuWrapper chatUniform">
             <input type="text" className='form-control' placeholder='Search for Friends'/>
-
-              {
-                conversations && conversations.map((c) => {
-                  return <ChatList key={c._id} conversation={c} currentUser={currentUser}/>
-                })
-              }
-        
+            {
+              conversations && conversations.map((c) => {
+                return <ChatList 
+                    key={c._id} 
+                    conversation={c} 
+                    currentUser={currentUser} 
+                    callBackFunc={handleChatListClick} 
+                  />
+              })
+            }
           </div>
         </div>
 
         <div className="chatBox col-md-6">
           <div className="chatBoxWrapper chatUniform">
-            <div className="chatBoxTop">
-              <Message />
-              <Message mine={true} />
-              <Message />
-              <Message />
-              <Message mine={true} />
-              <Message />
-              <Message />
-              <Message mine={true} />
-              <Message />
-            </div>
+            <ScrollToBottom className="chatBoxTop">
+              {
+                currentChat._id
+                ? (
+                    <>
+                      {
+                        messages.map((m) => (
+                            <Message  
+                              key={m._id}
+                              message={m} 
+                              mine={m._senderId === currentUser._id}
+                            />
+                          )
+                        )
+                      }
+                    </>
+                  ) 
+                : (
+                    <div className="alert alert-secondary text-center">
+                      <strong>No Chat:</strong> Open a conversation to start a chat
+                    </div>
+                  )
+              }
+              
+            </ScrollToBottom>
             <div className='chatBoxBottom'>
-                <input type="text" className="chatInput" placeholder="Type a message" />
-                <button className="btn btn-sm btn-primary">
+                <input 
+                    type="text" className="chatInput" 
+                    placeholder="Type a message"
+                    ref={newMessage} 
+                    onKeyUp={handleKeyUp}
+                  />
+
+                <button 
+                  className="btn btn-sm btn-primary" 
+                  disabled={currentChat._id ? false : true}  
+                  onClick={handleSendClick}
+                >
                   <NearMe />
                 </button>
               </div>
@@ -83,10 +152,12 @@ const mapStateToProps = (state) => {
 
   return {
     currentUser : auth.user,
-    conversations: messenger.conversations
+    conversations: messenger.conversations,
+    messages: messenger.messages
   }
 }
 
 
 
-export default connect(mapStateToProps, {getConversationsAction})(Messenger);
+export default connect(mapStateToProps, {getConversationsAction, getMessagesAction, 
+  postMessageAction})(Messenger);
