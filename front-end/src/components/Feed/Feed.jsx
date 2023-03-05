@@ -8,7 +8,8 @@ import "./Feed.css";
 
 
 const Feed = (props) => {
-  const {profile, user, currentUser, timelinePosts, profilePosts, getProfilePostsAction, getTimelinePostsAction} = props;
+  const {profile, user, currentUser, timelinePosts, profilePosts, 
+    getProfilePostsAction, getTimelinePostsAction} = props;
 
   const posts = profile ? profilePosts : timelinePosts;
     

@@ -20,7 +20,7 @@ function App(props) {
           <Route exact path="/profile/:username/:userID" element={<Profile />} />
           <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
           <Route exact path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
-          <Route exact path="/messenger" element={<Messenger />} />
+          <Route exact path="/messenger" element={user ? <Messenger /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </div>

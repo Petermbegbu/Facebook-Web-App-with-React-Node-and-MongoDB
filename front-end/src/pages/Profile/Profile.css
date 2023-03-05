@@ -58,3 +58,9 @@
     padding-right: 50px;
 }
 
+.userFriends {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+

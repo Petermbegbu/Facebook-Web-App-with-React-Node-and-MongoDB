@@ -1,4 +1,4 @@
-.onlineFriendDiv {
+.followingDiv {
     display: flex;
     align-items: center;
     padding: 10px 3px;
@@ -6,33 +6,24 @@
     border-radius: 10px 10px;
 }
 
-.onlineFriendDiv:hover {
+.followingDiv:hover {
     background-color: #E4E6E9;
 }
 
 
-.onlineImgDiv {
+.followingImgDiv {
     margin-right: 15px;
     position: relative;
 }
 
-.onlineBadge {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: limegreen;
-    position: absolute;
-    right: 0;
-    border: solid white 2px;
-}
 
-.onlineProfileImg {
+.followingProfileImg {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.onlineUsename {
+.followingUsername {
     font-weight: 500;
 }

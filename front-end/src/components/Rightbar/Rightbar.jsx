@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {CardGiftcard} from '@mui/icons-material';
+import { connect } from 'react-redux';
 
-import { Users } from '../../dummyData';
-import Online from '../Online/Online';
+import { getFollowingsAction } from '../../redux/actionCreators/friendsCreators';
+import Followings from '../Followings/Followings';
 import "./Rightbar.css";
 
-export default function Rightbar() {
+const Rightbar = (props) => {
+  const {currentUser, followings, getFollowingsAction} = props;
+
+
+  useEffect(() => {
+    const getFollowings = async () => {
+      await getFollowingsAction(currentUser._id)
+    }
+
+    getFollowings();
+  }, [currentUser._id])
+
+
   return (
     <div className='rightbarBody'>
 
@@ -36,11 +49,11 @@ export default function Rightbar() {
       <hr />
 
       <div>
-        <h6 className='text-secondary mb-3'>Online Friends</h6>
+        <h6 className='text-secondary mb-3'>Following Friends</h6>
 
         <ul className='rightbarFriendList'>
           {
-            Users.map(user => <Online key={user.id} user={user} />)
+            followings.map(friend => <Followings key={friend._id} friend={friend} />)
           }
         </ul>
       </div>
@@ -48,3 +61,15 @@ export default function Rightbar() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const {auth, friends} = state;
+
+  return {
+    currentUser: auth.user,
+    followings: friends.followings
+  }
+}
+
+
+export default connect(mapStateToProps, {getFollowingsAction})(Rightbar);

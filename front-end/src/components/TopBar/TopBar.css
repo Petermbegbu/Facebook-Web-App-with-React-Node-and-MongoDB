@@ -62,7 +62,14 @@
     cursor: pointer;
     margin-left: 20px;
     position: relative;
+    text-decoration: none;
+    color: white;
 }
+
+.topbarIconItem:hover {
+    color: white;
+}
+
 
 .topbarIconBadge {
     position: absolute;

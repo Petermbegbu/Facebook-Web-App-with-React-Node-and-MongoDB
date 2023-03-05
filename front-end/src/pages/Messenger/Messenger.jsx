@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import {NearMe} from '@mui/icons-material';
 import { connect } from 'react-redux';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import {io} from "socket.io-client";
 
-import ChatList from '../../components/ChatList/ChatList';
+import ConversationList from '../../components/ConversationList/ConversationList';
 import TopBar from '../../components/TopBar/TopBar';
 import Message from '../../components/Message/Message';
-import ChatOnline from '../../components/ChatOnline/ChatOnline';
+import ChatList from '../../components/ChatList/ChatList';
 import { getConversationsAction, getMessagesAction,
   postMessageAction } from '../../redux/actionCreators/messengerCreators';
 import "./Messenger.css";
@@ -20,13 +20,34 @@ const Messenger = (props) => {
 
   const [currentChat, setCurrentChat] = useState({});
   const [socket, setSocket] = useState(null);
+  const [textField, setTextField] = useState("");
+  const [emit, setEmit] = useState(false);
+  const [onlineIds, setOnlineIds] = useState([]);
 
-  const newMessage = useRef();
 
-
+  //setting socket
   useEffect(() => {
     setSocket(io("ws://localhost:5000"))
   }, [])
+
+
+  //socket-io events listeners
+  useEffect(() => {
+    if(socket) {
+      socket.emit("addUserId", currentUser._id)
+
+      socket.on("sendConnectedUsers", (data) => {
+        console.log("sendConnectedUsers", data)
+        setOnlineIds(data)
+      })
+
+      socket.on("getPrivateText", async (data) => {
+        await postMessageAction(data);
+      })
+    }
+  }, [socket, currentUser._id])
+
+
 
   useEffect(() => {
     getConversationsAction(currentUser._id);
@@ -34,7 +55,9 @@ const Messenger = (props) => {
 
   useEffect(() => {
     currentChat._id && getMessagesAction(currentChat._id);
-  }, [currentChat._id])
+
+    setEmit(false);
+  }, [currentChat._id, emit])
 
 
   const handleChatListClick = (conversation) => {
@@ -43,15 +66,18 @@ const Messenger = (props) => {
 
 
   const handleSendClick = async () => {
-    const chatMessage = {
+    
+    if(textField.trim() === "") return;
+
+    socket.emit("sendMessage", {
       _senderId: currentUser._id,
       _conversationId: currentChat._id,
-      text: newMessage.current.value
-    }
+      receiverId: currentChat.membersIds.find(id => id !== currentUser._id),
+      text: textField
+    })
 
-    await postMessageAction(chatMessage);
-
-    newMessage.current.value = "";
+    setTextField("");
+    setEmit(true)
   }
 
 
@@ -70,16 +96,25 @@ const Messenger = (props) => {
         <div className="chatMenu col-md-3">
           <div className="chatMenuWrapper chatUniform">
             <input type="text" className='form-control' placeholder='Search for Friends'/>
-            {
+
+            <ChatList 
+              onlineIds={onlineIds} 
+              currentUser={currentUser} 
+              setCurrentChat={setCurrentChat}
+            />
+           
+            <hr />
+
+            {/* {
               conversations && conversations.map((c) => {
-                return <ChatList 
+                return <ConversationList 
                     key={c._id} 
                     conversation={c} 
                     currentUser={currentUser} 
                     callBackFunc={handleChatListClick} 
                   />
               })
-            }
+            } */}
           </div>
         </div>
 
@@ -114,8 +149,10 @@ const Messenger = (props) => {
                 <input 
                     type="text" className="chatInput" 
                     placeholder="Type a message"
-                    ref={newMessage} 
+                    value={textField} 
                     onKeyUp={handleKeyUp}
+                    disabled={currentChat._id ? false : true}  
+                    onChange={(e) => setTextField(e.target.value)}
                   />
 
                 <button 
@@ -135,10 +172,6 @@ const Messenger = (props) => {
               <span className='onlineTitle'>Online Friends</span>
             </div>
 
-            <ChatOnline />
-            <ChatOnline />
-            <ChatOnline />
-            <ChatOnline />
           </div>
         </div>
       </div>

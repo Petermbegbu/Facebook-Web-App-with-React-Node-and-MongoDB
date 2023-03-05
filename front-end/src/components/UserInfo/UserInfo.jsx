@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import { followAction, unFollowAction } from '../../redux/actionCreators/authCreators';
-import UserFriends from '../UserFriends/UserFriends';
 import "./UserInfo.css";
 
 
@@ -11,24 +9,12 @@ import "./UserInfo.css";
 const UserInfo = (props) => {
   const {user, currentUser, followAction, unFollowAction} = props;
 
-  const [friends, setFriends] = useState([]);
   const [followed, setFollowed] = useState(false);
 
 
   useEffect(() => {
     setFollowed(currentUser.followings.includes(user._id))
   }, [currentUser.followings, user._id])
-
-
-  useEffect(() => {
-    const getFollowings = async () => {
-      const res = await axios.get(`/api/user/followings/${user._id}`);
-
-      setFriends(res.data);
-    }
-
-    getFollowings();
-  }, [user._id])
 
 
   const handleFollowClick = async () => {
@@ -65,17 +51,7 @@ const UserInfo = (props) => {
         </div>
         <div className='userInfoItem'>
             <span className="userInfoKey">Relationship:</span>
-            <span className="userInfoValue">Single</span>
-        </div>
-      </div>
-
-      <div className='userFriendsBlock'>
-        <h5 className='userInfoTitle'>User Friends</h5>
-
-        <div className='userFriends'>
-            {
-              friends.map(friend => <UserFriends key={friend._id} friend={friend} />)
-            }
+            <span className="userInfoValue"></span>
         </div>
       </div>
 

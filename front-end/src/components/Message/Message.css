@@ -2,12 +2,16 @@
     max-width: 60%;
     padding: 10px;
     border-radius: 10px 10px;
-    background-color: #E4E6E9;
 }
 
 .messageBox.mine {
     color: white;
     background-color: #1877F2;
+}
+
+.messageBox.other {
+    color: black;
+    background-color: #E4E6E9;
 }
 
 

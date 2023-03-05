@@ -7,8 +7,8 @@ export default function Message(props) {
   const {message, mine} = props;
 
   return (
-    <div className={mine ? "d-flex justify-content-end px-2 py-1" : "px-2 py-1"}>
-        <div className={mine ? "messageBox mine" : "messageBox"}>
+    <div className={mine ? "d-flex justify-content-end px-2 py-1" : "d-flex justify-content-start px-2 py-1"}>
+        <div className={mine ? "messageBox mine" : "messageBox other"}>
             <div className='messageTop'>
                 <img src="/images/persons/profile1.jpg" alt="" className="messageImg" />
                 <span className="messageText">{message.text}</span>

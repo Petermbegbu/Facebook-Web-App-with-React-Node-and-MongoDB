@@ -1,16 +1,19 @@
 import React from 'react'
+
+import { EMPTY_IMAGE_PATH } from '../../variables'
 import "./Online.css"
 
-export default function Online({user}) {
+export default function Online(props) {
+  const {friend, callBackFunc} = props;
+
+
   return (
-    <div>
-      <li className='rightbarFriend'>
-        <div className='friendsImgDiv'>
-          <img src={user.profilePicture} alt="profilePics" className="rightbarProfileImg" />
-          <span className='rightbarOnlineBadge'></span>
-        </div>
-        <span className='rightbarUsename'>{user.username}</span>
-      </li>
+    <div className='onlineFriendDiv' onClick={() => callBackFunc(friend)}>
+      <div className='onlineImgDiv'>
+        <img src={friend.profilePicture.url || EMPTY_IMAGE_PATH} alt="profilePics" className="onlineProfileImg" />
+        <span className='onlineBadge'></span>
+      </div>
+      <span className='onlineUsename'>{friend.username}</span>
     </div>
   )
 }

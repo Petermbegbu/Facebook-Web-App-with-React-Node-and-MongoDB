@@ -8,7 +8,7 @@ import "./UserFriends.css";
 const UserFriends = ({friend}) => {
 
   return (
-    <Link to={`/profile/${friend.username}/${friend._id}`} className="friendsLink">
+    <Link to={`/profile/${friend.username}/${friend._id}`} className="friendsLink col">
       <div className='userFriendItem'>
           <div className='userFriendImgDiv'>
               <img src={friend.profilePicture || EMPTY_IMAGE_PATH} alt="" className="userFriendImg" />

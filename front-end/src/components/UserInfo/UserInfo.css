@@ -37,11 +37,6 @@
     padding: 20px;
 }
 
-.userFriends {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .followBtn {
     margin-bottom: 20px;
     font-weight: bold;

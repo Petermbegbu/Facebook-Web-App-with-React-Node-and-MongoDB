@@ -30,3 +30,20 @@ module.exports.getConversations = async (req, res) => {
         res.status(500).json(err);
     }
 }
+
+
+
+//Get one chat conversation
+module.exports.getConversation = async (req, res) => {
+    const {id1, id2} = req.params; // id of current user
+
+    try{
+        const conversation = await Conversations.findOne({
+            membersIds: {$all: [id1, id2]}
+        })
+
+        res.status(200).json(conversation);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}

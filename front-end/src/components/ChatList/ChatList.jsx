@@ -1,35 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 
-import { EMPTY_IMAGE_PATH } from '../../variables';
+import Online from '../Online/Online';
 import "./ChatList.css";
 
-
 const ChatList = (props) => {
-  const {conversation, currentUser, callBackFunc} = props;
+  const {onlineIds, currentUser, setCurrentChat} = props;
 
-  const [user, setUser] = useState(null);
+  const [followings, setFollowings] = useState([]);
+  const [onlineFriends, setOnlineFriends] = useState([]);
+  const [offlineFriends, setOfflineFriends] = useState([]);
 
 
+
+    //get all friends
   useEffect(() => {
-    const friendId = conversation.membersIds.find((id) => id !== currentUser._id);
+    const getFollowings = async () => {
+      const res = await axios.get(`/api/user/followings/${currentUser._id}`);
 
-    const getUser = async () => {
-      const res = await axios.get(`/api/user/get/${friendId}`)
-
-      setUser(res.data);
+      setFollowings(res.data);
     }
 
-    getUser()
+    getFollowings();
+  }, [currentUser._id])
+  
 
-  }, [conversation.membersIds, currentUser._id])
+   //set online friends
+   useEffect(() => {
+    const online = followings.filter(friend => onlineIds.some(online => online.userId === friend._id));
+
+    setOnlineFriends(online)
+  }, [followings, onlineIds])
+
+
+  const handleOnlineClick = async (friend) => {
+    try {
+      const res = await axios.get(`/api/conversation/get/single/${currentUser._id}/${friend._id}`);
+
+      setCurrentChat(res.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 
   return (
-    <div className='chatListItem' onClick={() => callBackFunc(conversation)}>
-      <img src={user && user.profilePicture.url ? user.profilePicture.url : EMPTY_IMAGE_PATH} 
-        alt="" className="chatListProfileImg" />
-      <span className="chatListText">{user && user.username}</span>
+    <div>
+      {
+        onlineFriends.map(friend => (
+            <Online key={friend._id} friend={friend} callBackFunc={handleOnlineClick}/>
+          )
+        )
+      }
     </div>
   )
 }
