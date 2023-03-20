@@ -11,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import App from './App';
 import rootReducer from './redux/reducers/rootReducer';
+import { ThemeContextElement } from './contextAPI';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -23,7 +24,9 @@ root.render(
   //<React.StrictMode>
   <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <App />
+        <ThemeContextElement>
+          <App />
+        </ThemeContextElement>
       </PersistGate>
   </Provider>
   //</React.StrictMode>

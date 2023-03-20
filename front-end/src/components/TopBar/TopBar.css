@@ -135,8 +135,8 @@
 
 
 
-/* For mobile view */
-@media only screen and (max-width: 600px) {
+/* For mobile and tablet view  */
+@media only screen and (max-width: 768px) {
     .topbarLeft {
         display: flex;
         justify-content: center;
@@ -155,5 +155,8 @@
         align-items: center;
     }
 
-    
+    .leftMenuBlock {
+        display: flex;
+        justify-content: center;
+    }
 }

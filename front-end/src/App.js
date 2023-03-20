@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import { connect } from "react-redux";
-import useLocalStorage from "use-local-storage";
 
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
@@ -14,16 +13,9 @@ import "./App.css";
 function App(props) {
   const {user} = props;
 
-  const [theme, setTheme] = useLocalStorage('')
-
-
-  const switchTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  }
+  const {theme} = useContext(ThemeContext)
 
   return (
-    <ThemeContext.Provider value={{switchTheme}}>
       <div className="appContainer" data-theme={theme}>
         <BrowserRouter>
           <Routes>
@@ -35,7 +27,6 @@ function App(props) {
           </Routes>
         </BrowserRouter>
       </div>
-    </ThemeContext.Provider>
   )
 }
 

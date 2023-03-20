@@ -14,7 +14,7 @@ import "./TopBar.css";
 
   const [open, setOpen] = useState(false);
 
-  const theme = useContext(ThemeContext);
+  const {switchTheme} = useContext(ThemeContext);
 
   const handleLogout = async () => {
     await logoutAction();
@@ -40,16 +40,16 @@ import "./TopBar.css";
       {/* Topbar left */}
       <div className='topbarLeft col-md-4 py-2'>
         <div className='row'>
-          <div className='col-md-7'>
+          <div className='col-md-7 leftMenuBlock'>
             <Link to="/" className='logoLink'>
               <span className="logo">PUM</span>
             </Link>
           </div>
-          <div className='col-md-5 d-flex align-items-center'>
+          <div className='col-md-5 d-flex align-items-center leftMenuBlock'>
             <Link to="/" className='topbarIconItem'>
               <Home />
             </Link>
-            <div className='topbarIconItem' onClick={theme.switchTheme}>
+            <div className='topbarIconItem' onClick={switchTheme}>
               <DarkMode />
             </div>
           </div>
