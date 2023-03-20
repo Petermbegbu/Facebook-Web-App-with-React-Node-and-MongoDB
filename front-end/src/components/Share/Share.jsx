@@ -60,7 +60,7 @@ const Share = (props) => {
             <img src={user.profilePicture || EMPTY_IMAGE_PATH} alt="profileImg" className="shareProfileImg" />
           </Link>
           <input type="text" className="shareInput" ref={desc} 
-              placeholder={`What's on your mind, ${user.username}?`} />
+            placeholder={`What's on your mind, ${user.username}?`} />
         </div>
 
         <hr className='shareHr'/>

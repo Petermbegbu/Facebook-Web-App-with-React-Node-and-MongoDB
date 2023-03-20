@@ -1,7 +1,8 @@
 .leftbarBody {
-    height: cal(100vh - 50px);
     position: sticky;
-    top: 0;
+    top: 77px;
+    height: cal(100vh - 77px);
+    color: var(--textColor);
 }
 
 .sidebarList {
@@ -19,7 +20,7 @@
 }
 
 .sidebarListItem:hover {
-    background-color: #E4E6E9;
+    background-color: var(--bgHover);
 }
 
 .sidebarIcon {

@@ -54,6 +54,7 @@ export default function Leftbar() {
           <ArrowDropDownCircle className='sidebarIcon'/>
           <span className="sidebarListText">See more</span>
         </li>
+        
       </ul>
     </div>
   )

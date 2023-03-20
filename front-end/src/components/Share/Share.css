@@ -2,7 +2,8 @@
     width: 100%;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--bgPosts);
+    color: var(--textColor);
     -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
     box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
 }
@@ -25,7 +26,10 @@
 
 .shareInput {
     width: 90%;
+    height: 30px;
     border: none;
+    color: var(--textColor);
+    background-color: var(--bgInput);
 }
 
 .shareInput:focus {

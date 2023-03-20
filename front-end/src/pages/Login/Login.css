@@ -24,6 +24,7 @@
 
 .loginDesc {
     font-size: 20px;
+    color: var(--textColor);
 }
 
 .formBar {

@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Link} from "react-router-dom"
-import {Search, Person, Chat, Notifications} from '@mui/icons-material';
+import {Search, Person, Chat, Notifications, Home, DarkMode} from '@mui/icons-material';
 import { connect } from 'react-redux';
 
 import { logoutAction } from '../../redux/actionCreators/authCreators';
 import { EMPTY_IMAGE_PATH } from '../../variables';
+import { ThemeContext } from '../../contextAPI';
 import "./TopBar.css";
 
 
@@ -12,6 +13,8 @@ import "./TopBar.css";
   const {user, logoutAction} = props;
 
   const [open, setOpen] = useState(false);
+
+  const theme = useContext(ThemeContext);
 
   const handleLogout = async () => {
     await logoutAction();
@@ -36,12 +39,25 @@ import "./TopBar.css";
 
       {/* Topbar left */}
       <div className='topbarLeft col-md-4 py-2'>
-        <Link to="/" className='logoLink'>
-          <span className="logo">PUM</span>
-        </Link>
+        <div className='row'>
+          <div className='col-md-7'>
+            <Link to="/" className='logoLink'>
+              <span className="logo">PUM</span>
+            </Link>
+          </div>
+          <div className='col-md-5 d-flex align-items-center'>
+            <Link to="/" className='topbarIconItem'>
+              <Home />
+            </Link>
+            <div className='topbarIconItem' onClick={theme.switchTheme}>
+              <DarkMode />
+            </div>
+          </div>
+        </div>
+        
       </div>
 
-        {/* Topbar Center */}
+      {/* Topbar Center */}
       <div className='topbarCenter col-md-4 py-2'>
         <div className="searchDiv">
             <Search className='searchIcon'/>
@@ -49,9 +65,8 @@ import "./TopBar.css";
         </div>
       </div>
 
-        {/* Topbar Right */}
+      {/* Topbar Right */}
       <div className='topbarRight col-md-4 py-2'>
-
         <div className="topbarIcons">
             <div className='topbarIconItem'>
                 <Person />

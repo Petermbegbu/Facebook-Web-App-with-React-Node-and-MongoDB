@@ -1,10 +1,13 @@
+
 .topbarContainer {
     width: 100%;
-    background-color: #1877F2;
+    background-color: var(--TopBarBgColor);
     display: flex;
     align-items: center;
     z-index: 5;
     margin: 0;
+    -webkit-box-shadow: var(--webkitBoxShadow); 
+    box-shadow: var(--boxShadow);
 }
 
 .topbarRight {
@@ -19,7 +22,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-left: 20px;
-    color: white;
+    color: var(--logoColor)
 }
 
 .logoLink {
@@ -60,7 +63,7 @@
 
 .topbarIconItem {
     cursor: pointer;
-    margin-left: 20px;
+    margin-left: 25px;
     position: relative;
     text-decoration: none;
     color: white;
@@ -99,8 +102,8 @@
     text-align: center;
     border-radius: 10px;
     background-color: white;
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.50);
+    -webkit-box-shadow: var(--webkitBoxShadow);
+    box-shadow: var(--boxShadow);
     position: absolute;
     top: 50px;
     right: -25px;
@@ -119,7 +122,7 @@
 
 .dropdownLink:hover {
     color: white;
-    background-color: #1877F2;
+    background-color: var(--TopBarBgColor);
     font-size: 16px;
 }
 
@@ -151,4 +154,6 @@
         justify-content: space-around;
         align-items: center;
     }
+
+    
 }

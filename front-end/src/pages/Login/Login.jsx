@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react'
 import { connect } from 'react-redux';
 import { CircularProgress } from '@mui/material';
-import { loginSchema } from '../../validations/loginValidation';
+import { Link } from "react-router-dom"
 
+import { loginSchema } from '../../validations/loginValidation';
 import { loginAction } from '../../redux/actionCreators/authCreators';
 import "./Login.css";
 
@@ -67,7 +68,9 @@ const Login = (props) => {
 
                 <p className='resetPassword'>Forgot Password ?</p>
 
-                <button className='btn createNewBtn'>Creat a New Account</button>
+                <Link to="/register">
+                  <button className='btn createNewBtn'>Creat a New Account</button>
+                </Link>
             </div>
         </div>
 

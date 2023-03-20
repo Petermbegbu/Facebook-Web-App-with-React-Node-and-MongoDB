@@ -12,7 +12,7 @@
 .chatBoxTop {
     height: 75vh;
     overflow-y: scroll;
-    background-color: white;
+    background-color: var(--chatBoxBackground);
 }
 
 .chatBoxBottom {
@@ -31,14 +31,20 @@
     border-bottom: 2px solid gray;
     padding: 20px 5px 0px 5px;
     outline: none;
+    background-color: var(--chatBoxBackground);
+    color: var(--textColor);
 }
 
-.onlineTitleDiv {
+.allFollowersWrapper{
+    color: var(--textColor);
+}
+
+.allFollowersTitleDiv {
     padding: 15px 0px 15px 2px;
     border-bottom: 1px solid gray;
 }
 
-.onlineTitle {
+.allFollowersTitle {
     font-size: 17px;
     font-weight: 600;
     letter-spacing: 3px;

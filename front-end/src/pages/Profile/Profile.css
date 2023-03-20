@@ -1,6 +1,6 @@
-.profileBody {
+/* .profileBody {
     background-color: #F0F2F5;
-}
+} */
 
 .profileLeft {
     padding: 20px 15px 0px 15px;
@@ -43,6 +43,7 @@
     font-weight: bold;
     letter-spacing: 3px;
     margin-top: 5px;
+    color: var(--textColor)
 }
 
 .profileInfoDesc {
@@ -64,3 +65,14 @@
 }
 
 
+.userFriendsBlock {
+    width: 100%;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    background-color: var(--bgPosts);
+    -webkit-box-shadow: var(--webkitBoxShadow); 
+    box-shadow: var(--boxShadow);
+    padding: 20px;
+    color: var(--textColor)
+
+}

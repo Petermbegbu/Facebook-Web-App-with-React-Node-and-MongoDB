@@ -13,7 +13,8 @@ const ChatList = (props) => {
 
 
 
-    //get all friends
+
+  //get all friends
   useEffect(() => {
     const getFollowings = async () => {
       const res = await axios.get(`/api/user/followings/${currentUser._id}`);
@@ -43,6 +44,7 @@ const ChatList = (props) => {
     }
   }
 
+  console.log("onlineFriends", followings)
 
   return (
     <div>

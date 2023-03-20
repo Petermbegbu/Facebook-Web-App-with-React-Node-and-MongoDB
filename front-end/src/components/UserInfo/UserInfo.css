@@ -3,10 +3,11 @@
     width: 100%;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: white;
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
+    background-color: var(--bgPosts);
+    -webkit-box-shadow: var(--webkitBoxShadow); 
+    box-shadow: var(--boxShadow);
     padding: 20px;
+    color: var(--textColor)
 }
 
 .userInfoTitle {
@@ -23,19 +24,7 @@
     font-size: 15px;
 }
 
-.userInfoValue {
-    color: gray;
-}
 
-.userFriendsBlock {
-    width: 100%;
-    margin-bottom: 50px;
-    border-radius: 10px;
-    background-color: white;
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18); 
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
-    padding: 20px;
-}
 
 .followBtn {
     margin-bottom: 20px;

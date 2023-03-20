@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { registerSchema } from '../../validations/registerValidation';
@@ -79,7 +79,10 @@ export default function Register() {
                 <input type="password" className="form-control" placeholder="Re-enter Password" ref={rePassword}/>
 
                 <button className='btn RegisterBtn' onClick={handleSignupClick}>Sign Up</button>
-                <button className='btn LogIntoAcc'>Log into Account</button>
+
+                <Link to="/login">
+                  <button className='btn LogIntoAcc'>Log into Account</button>
+                </Link>
             </div>
         </div>
 

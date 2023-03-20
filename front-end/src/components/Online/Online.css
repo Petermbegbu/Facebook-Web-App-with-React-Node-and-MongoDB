@@ -4,10 +4,11 @@
     padding: 10px 3px;
     cursor: pointer;
     border-radius: 10px 10px;
+    color: var(--textColor);
 }
 
 .onlineFriendDiv:hover {
-    background-color: #E4E6E9;
+    background-color: var(--bgHover)
 }
 
 

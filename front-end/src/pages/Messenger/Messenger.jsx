@@ -119,7 +119,7 @@ const Messenger = (props) => {
         </div>
 
         <div className="chatBox col-md-6">
-          <div className="chatBoxWrapper chatUniform">
+          <div className="chatUniform">
             <ScrollToBottom className="chatBoxTop">
               {
                 currentChat._id
@@ -166,10 +166,10 @@ const Messenger = (props) => {
           </div>
         </div>
 
-        <div className="chatOnline col-md-3">
-          <div className="chatOnlineWrapper chatUniform">
-            <div className='onlineTitleDiv'>
-              <span className='onlineTitle'>Online Friends</span>
+        <div className="allFollowersWrapper col-md-3">
+          <div className="chatUniform">
+            <div className='allFollowersTitleDiv'>
+              <span className='allFollowersTitle'>All Followers</span>
             </div>
 
           </div>

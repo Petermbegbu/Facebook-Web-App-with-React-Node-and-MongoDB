@@ -1,8 +1,10 @@
 
 .rightbarBody {
-    height: cal(100vh - 50px);
-    /* overflow-y: scroll; */
-    
+    /* position: sticky;
+    top: 77px;
+    height: cal(100vh - 77px);
+    overflow-y: scroll; */
+    color: var(--textColor);
 }
 
 .birthdayDiv {
@@ -13,6 +15,7 @@
 .birthdayText {
     font-size: 14px;
     margin-left: 10px;
+    letter-spacing: 2px;
 }
 
 .ads {
