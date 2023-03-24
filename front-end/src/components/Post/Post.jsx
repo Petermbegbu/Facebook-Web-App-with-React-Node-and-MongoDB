@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import {MoreVert, ThumbUp, Favorite} from '@mui/icons-material';
+import {MoreVert, ModeCommentOutlined, Favorite, FavoriteBorder} from '@mui/icons-material';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {format} from "timeago.js";
 import axios from "axios";
 
-import "./Post.css";
+import Comments from '../Comments/Comments';
 import { EMPTY_IMAGE_PATH } from '../../variables';
+import "./Post.css";
+
 
 
 
 const Post = (props) => {
   const {post, currentUser} = props;
 
-  //set like or dislike
   const [like, setLike] = useState(post.likes.length);
   const [isLike, setIsLike] = useState(false);
+  const [isComment, setIsComment] = useState(false);
+
+  const [comments, setComments] = useState([]);
 
   //set user from Database
   const [user, setUser] = useState({});
@@ -36,6 +40,28 @@ const Post = (props) => {
 
     fetchUser();
   }, [post._userId])
+
+
+
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await axios.get(`/api/comment/get/${post._id}`)
+
+        //Re-arranging the return value
+        const commentList = res.data.map(({comment, profilePicture, username}) => {
+          return {...comment, profilePicture, username}
+        })
+
+        setComments(commentList)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    getComments();
+  }, [post._id])
+
 
 
   const likeHandler = async () => {
@@ -69,13 +95,25 @@ const Post = (props) => {
         </div>
         <div className="postBottom">
             <div className="postBottomLeft">
-                <ThumbUp htmlColor='#1877F2' className='postLikeIcon' onClick={likeHandler}/>
-                <Favorite htmlColor='red' className='postLikeIcon' onClick={likeHandler}/>
-                <span className="postLikeCounter">{like}</span>
+              {
+                isLike 
+                  ? <Favorite htmlColor='red' className='postLikeIcon' onClick={likeHandler}/>
+                  : <FavoriteBorder htmlColor='red' className='postLikeIcon' onClick={likeHandler}/>
+              }
+              <span className="postLikeCounter">{like}</span>
             </div>
             <div className="postBottomRight">
-                <span className="postCommentText">Comments</span>
+                <span className="postCommentIconBlock" onClick={() => setIsComment(!isComment)}>
+                  <ModeCommentOutlined className='postCommentIcon'/>
+                  <span>{comments.length}</span>
+                </span>
             </div>
+        </div>
+
+        <div>
+          {
+            isComment && <Comments currentUser={currentUser} post={post} comments={comments} setComments={setComments}/>
+          }
         </div>
       </div>
     </div>

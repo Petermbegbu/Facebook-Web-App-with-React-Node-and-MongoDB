@@ -3,7 +3,7 @@
     /* position: sticky;
     top: 77px;
     height: cal(100vh - 77px);
-    overflow-y: scroll; */
+    overflow: scroll; */
     color: var(--textColor);
 }
 

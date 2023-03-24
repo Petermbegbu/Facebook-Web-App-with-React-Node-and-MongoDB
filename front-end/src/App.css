@@ -23,6 +23,7 @@
     --boxShadow: 0px 0px 6px 0px rgba(0,0,0,0.18);
     --logoColor: white;
     --chatBoxBackground: white;
+    --commentBgColor: rgb(226, 223, 223);
 }
 
 
@@ -37,6 +38,7 @@
     --boxShadow: 0px 0px 6px 0px rgba(148, 145, 145, 0.18);
     --logoColor: #1877F2;
     --chatBoxBackground: rgb(34, 34, 34);
+    --commentBgColor: rgb(58, 57, 57);
 
 }
 

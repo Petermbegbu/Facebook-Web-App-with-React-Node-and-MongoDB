@@ -1,6 +1,7 @@
-/* .profileBody {
-    background-color: #F0F2F5;
-} */
+.profileBody {
+    width: 100%;
+    margin: 0;
+}
 
 .profileLeft {
     padding: 20px 15px 0px 15px;

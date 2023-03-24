@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {NearMe} from '@mui/icons-material';
+import {Send} from '@mui/icons-material';
 import { connect } from 'react-redux';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import {io} from "socket.io-client";
@@ -160,7 +160,7 @@ const Messenger = (props) => {
                   disabled={currentChat._id ? false : true}  
                   onClick={handleSendClick}
                 >
-                  <NearMe />
+                  <Send />
                 </button>
               </div>
           </div>

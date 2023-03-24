@@ -73,11 +73,14 @@
     margin-right: 10px;
     cursor: pointer;
 }
-
-.postCommentText {
+.postCommentIconBlock {
     cursor: pointer;
 }
 
-.postCommentText:hover {
-    border-bottom: 1px solid gray;
+.postCommentIcon {
+    margin-right: 10px;
+}
+
+.commentSection {
+    margin-top: 30px;
 }

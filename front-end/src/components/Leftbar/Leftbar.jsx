@@ -1,17 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {RssFeed, Chat, PlayCircleFilled, Groups, Bookmark, Help, Work, Event, School, 
   ArrowDropDownCircle } from '@mui/icons-material';
 
+import { EMPTY_IMAGE_PATH } from '../../variables';
 import "./Leftbar.css";
 
 
-export default function Leftbar() {
+const Leftbar = (props) => {
+  const {currentUser} = props;
+
   return (
     <div className='leftbarBody'>
       <ul className="sidebarList">
         <li className="sidebarListItem">
-          <img src="/images/persons/profile1.jpg" alt="" className="leftbarProfileImg" />
-          <span className="sidebarListText">Peter Mbegbu</span>
+          <img src={currentUser.profilePicture || EMPTY_IMAGE_PATH} alt="" className="leftbarProfileImg" />
+          <span className="sidebarListText">{currentUser.username}</span>
         </li>
         <li className="sidebarListItem">
           <RssFeed htmlColor='green' className='sidebarIcon'/>
@@ -59,3 +63,14 @@ export default function Leftbar() {
     </div>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  const {auth} = state;
+
+  return {
+    currentUser: auth.user 
+  }
+}
+
+export default connect(mapStateToProps)(Leftbar);

@@ -17,6 +17,7 @@ const io = new Server(server, {
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const postRoute = require("./routes/postRoute");
+const commentRoute = require("./routes/commentRoute");
 const messageRoute = require("./routes/messageRoute");
 const conversationRoute = require("./routes/conversationRoute");
 const socketio = require("./socketio");
@@ -36,6 +37,8 @@ app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
 app.use("/api/message", messageRoute);
 app.use("/api/conversation", conversationRoute);
+app.use("/api/comment", commentRoute);
+
 
 //socketio request
 socketio(io);

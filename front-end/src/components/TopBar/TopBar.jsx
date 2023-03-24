@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {Link} from "react-router-dom"
-import {Search, Person, Chat, Notifications, Home, DarkMode} from '@mui/icons-material';
+import {Search, Person, Chat, Notifications, Home, DarkMode, LightMode} from '@mui/icons-material';
 import { connect } from 'react-redux';
 
 import { logoutAction } from '../../redux/actionCreators/authCreators';
@@ -14,7 +14,7 @@ import "./TopBar.css";
 
   const [open, setOpen] = useState(false);
 
-  const {switchTheme} = useContext(ThemeContext);
+  const {switchTheme, theme} = useContext(ThemeContext);
 
   const handleLogout = async () => {
     await logoutAction();
@@ -50,7 +50,9 @@ import "./TopBar.css";
               <Home />
             </Link>
             <div className='topbarIconItem' onClick={switchTheme}>
-              <DarkMode />
+              {
+                theme === "light" ? <DarkMode /> : <LightMode />
+              }
             </div>
           </div>
         </div>

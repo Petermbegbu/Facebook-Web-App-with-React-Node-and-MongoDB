@@ -12,8 +12,6 @@ const ChatList = (props) => {
   const [offlineFriends, setOfflineFriends] = useState([]);
 
 
-
-
   //get all friends
   useEffect(() => {
     const getFollowings = async () => {
@@ -43,8 +41,6 @@ const ChatList = (props) => {
       console.log(err)
     }
   }
-
-  console.log("onlineFriends", followings)
 
   return (
     <div>
