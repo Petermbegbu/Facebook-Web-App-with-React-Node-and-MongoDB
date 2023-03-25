@@ -72,3 +72,8 @@
     height: 45px;
     margin-bottom: 20px;
 }
+
+.errMessageRegister {
+    color: var(--errorTextColor);
+    text-align: center;
+}

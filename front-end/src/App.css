@@ -15,6 +15,7 @@
 [data-theme='light'] {
     --TopBarBgColor: #1877F2;
     --bgBodyColor: #F0F2F5;
+    --bgModalColor: rgb(238, 236, 236);
     --bgPosts: white;
     --bgInput: white;
     --textColor: black;
@@ -24,12 +25,14 @@
     --logoColor: white;
     --chatBoxBackground: white;
     --commentBgColor: rgb(226, 223, 223);
+    --errorTextColor: red;
 }
 
 
 [data-theme='dark'] {
     --TopBarBgColor: #2d2d2e;
     --bgBodyColor: rgb(27, 25, 25);
+    --bgModalColor: rgb(78, 78, 78);
     --bgPosts: #202022;
     --bgInput: rgb(75, 73, 73);
     --textColor: white;
@@ -39,6 +42,7 @@
     --logoColor: #1877F2;
     --chatBoxBackground: rgb(34, 34, 34);
     --commentBgColor: rgb(58, 57, 57);
+    --errorTextColor: rgb(203, 235, 20);
 
 }
 

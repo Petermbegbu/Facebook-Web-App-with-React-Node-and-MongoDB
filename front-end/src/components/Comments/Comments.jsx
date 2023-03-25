@@ -13,8 +13,12 @@ function Comments(props) {
   const commentText = useRef();
 
   const handleCommentSend = async () => {
+    const text = commentText.current.value;
+
+    if (text.trim() == "") return;
+
     const data = {
-      text: commentText.current.value,
+      text: text,
       _userId: currentUser._id,
       _postId: post._id
     }

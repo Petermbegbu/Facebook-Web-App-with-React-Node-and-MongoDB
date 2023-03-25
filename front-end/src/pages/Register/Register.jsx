@@ -43,7 +43,6 @@ export default function Register() {
         //We dont want to use redux for this call as we wont be updating redux state with any value,
         //we only want to register user
         const res = await axios.post("/api/auth/signup", userCredentials);
-        console.log(res);
 
         //programmatic navigation to login page
         useNavigate("/login");
@@ -69,8 +68,8 @@ export default function Register() {
             <div className='formDiv'>
                 {
                   !isValid 
-                    ? <h6 className='errMessage'>Please fill all fields correctly</h6> 
-                    : pwdMessage ?  <h6 className='errMessage'>{pwdMessage}</h6> 
+                    ? <h6 className='errMessageRegister'>Please fill all fields correctly</h6> 
+                    : pwdMessage ?  <h6 className='errMessageRegister'>{pwdMessage}</h6> 
                     : ""
                 }
                 <input type="text" className="form-control" placeholder="Username" ref={username} />

@@ -7,6 +7,7 @@ import Feed from '../../components/Feed/Feed';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import UserFriends from '../../components/UserFriends/UserFriends';
 import TopBar from '../../components/TopBar/TopBar';
+import UpdateModal from '../../components/UpdateModal/UpdateModal';
 import { EMPTY_IMAGE_PATH } from '../../variables';
 import "./Profile.css";
 
@@ -15,6 +16,7 @@ const Profile = () => {
 
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
+    const [isModal, setIsModal] = useState(false)
 
     //check for profile pictures
     const profilePicture = user && user.profilePicture ? user.profilePicture : EMPTY_IMAGE_PATH;
@@ -60,6 +62,7 @@ const Profile = () => {
                         <div className='profileInfo'>
                             <h4 className="profileInfoName">{user && user.username}</h4>
                             <span className="profileInfoDesc">{user && user.description}</span>
+                            <button className='btn btn-primary' onClick={() => setIsModal(!isModal)}>Update</button>
                         </div>
                     </div>
                     <div className="row profileRightBottom">
@@ -84,6 +87,12 @@ const Profile = () => {
                 </div>
 
             </div>
+
+            <>
+                {
+                    isModal &&  <UpdateModal isModal={isModal} setIsModal={setIsModal}/>
+                }
+            </>
         </div>
     
     )

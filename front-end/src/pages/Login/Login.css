@@ -80,7 +80,7 @@
     cursor: pointer;
 }
 
-.errMessage {
-    color: red;
+.errMessageLogin {
+    color: var(--errorTextColor);
     text-align: center;
 }

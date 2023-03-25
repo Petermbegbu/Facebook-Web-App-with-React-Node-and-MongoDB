@@ -11,7 +11,7 @@ import "./Login.css";
 
 const Login = (props) => {
 
-  //Destructure props
+  //Distructure props
   const {loginAction, isFetching, error} = props;
 
   const [isValid, setIsValid] = useState(true);
@@ -55,8 +55,8 @@ const Login = (props) => {
             <div className='formDiv'>
                 {
                   !isValid 
-                    ? <h6 className='errMessage'>Please fill all fields correctly</h6> 
-                    : error ?  <h6 className='errMessage'>{error}</h6> 
+                    ? <h6 className='errMessageLogin'>Please fill all fields correctly</h6> 
+                    : error ?  <h6 className='errMessageLogin'>{error}</h6> 
                     : ""
                 }
 

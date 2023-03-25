@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px
 }
 
 .shareProfileImg {
@@ -29,7 +30,7 @@
     height: 30px;
     border: none;
     color: var(--textColor);
-    background-color: var(--bgInput);
+    /* background-color: var(--bgInput); */
 }
 
 .shareInput:focus {
