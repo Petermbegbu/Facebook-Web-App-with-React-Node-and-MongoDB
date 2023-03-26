@@ -85,7 +85,7 @@ import "./TopBar.css";
         </div>
 
         <div className='imgDropdown'>
-          <img src={user.profilePicture ? user.profilePicture : EMPTY_IMAGE_PATH} 
+          <img src={user.profilePicture ? user.profilePicture.url : EMPTY_IMAGE_PATH} 
             alt="" className="topbarImg" onMouseOver={handleMouseOver} />
 
           {

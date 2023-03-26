@@ -14,7 +14,7 @@ const Leftbar = (props) => {
     <div className='leftbarBody'>
       <ul className="sidebarList">
         <li className="sidebarListItem">
-          <img src={currentUser.profilePicture || EMPTY_IMAGE_PATH} alt="" className="leftbarProfileImg" />
+          <img src={currentUser.profilePicture.url || EMPTY_IMAGE_PATH} alt="" className="leftbarProfileImg" />
           <span className="sidebarListText">{currentUser.username}</span>
         </li>
         <li className="sidebarListItem">

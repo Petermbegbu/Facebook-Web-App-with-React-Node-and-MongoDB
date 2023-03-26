@@ -10,9 +10,13 @@ import "./UpdateModal.css"
 const UpdateModal = (props) => {
     const {isModal, setIsModal, isUpdate, setIsUpdate, updateUserAction} = props;
 
+    const GENDER = ["Male", "Female"];
+    const RELATIONSHIP = ["Single", "Married"];
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [gender, setGender] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
     const [relationship, setRelationship] = useState("");
@@ -47,6 +51,7 @@ const UpdateModal = (props) => {
         if (username.trim() !== "") userCredentials.username = username;
         if (email.trim() !== "") userCredentials.email = email;
         if (password.trim() !== "") userCredentials.password = password;
+        if (gender.trim() !== "") userCredentials.gender = gender;
         if (city.trim() !== "") userCredentials.city = city;
         if (country.trim() !== "") userCredentials.country = country;
         if (relationship.trim() !== "") userCredentials.relationship = relationship;
@@ -132,19 +137,30 @@ const UpdateModal = (props) => {
                         <input type="text" className="updateInput" placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)}/>
 
+                        <select className="updateInput" onChange={(e) => setGender(e.target.value)}>
+                            <option value="">Gender</option>
+                            {
+                                GENDER.map(gender => <option key={gender} value={gender}>{gender}</option>)
+                            }
+                        </select>
+
                         <input type="text" className="updateInput" placeholder="City" 
                             onChange={(e) => setCity(e.target.value)}/>
 
                         <input type="text" className="updateInput" placeholder="Country" 
                             onChange={(e) => setCountry(e.target.value)}/>
 
-                        <input type="text" className="updateInput" placeholder="Relationship"  
-                            onChange={(e) => setRelationship(e.target.value)}/>
+                        <select className="updateInput" onChange={(e) => setRelationship(e.target.value)}>
+                            <option value="">Relationship</option>
+                            {
+                                RELATIONSHIP.map(rel => <option key={rel} value={rel}>{rel}</option>)
+                            }
+                        </select>
 
-                        <button type='button' className='btn btn-primary updateBtn' onClick={handleUpdateClick}>
+                        <button type='button' className='btn btn-sm btn-primary updateBtn' onClick={handleUpdateClick}>
                             Update
                         </button>
-                        <button type='button' className='btn btn-danger cancelBtn' onClick={() => setIsModal(!isModal)}>
+                        <button type='button' className='btn btn-sm btn-danger cancelBtn' onClick={() => setIsModal(!isModal)}>
                             Cancel
                         </button>
                     </form>

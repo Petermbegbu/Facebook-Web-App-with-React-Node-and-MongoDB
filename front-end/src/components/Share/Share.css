@@ -82,4 +82,6 @@
     position: absolute;
     top: 0;
     right: 0;
+    background-color: rgb(250, 85, 85);
+    border-radius: 50%;
 }

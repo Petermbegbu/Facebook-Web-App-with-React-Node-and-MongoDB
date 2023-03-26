@@ -24,6 +24,7 @@ const Post = (props) => {
   //set user from Database
   const [user, setUser] = useState({});
 
+  const profilePicture = user.profilePicture ? user.profilePicture.url : EMPTY_IMAGE_PATH;
 
   useEffect(() => {
     setIsLike(post.likes.includes(currentUser._id));
@@ -78,7 +79,7 @@ const Post = (props) => {
         <div className="postTop">
             <div className="postTopLeft">
               <Link to={`/profile/${user.username}/${user._id}`} className="postProfileLink">
-                <img src={user.profilePicture || EMPTY_IMAGE_PATH} alt="" className="postProfileImg" />
+                <img src={profilePicture} alt="" className="postProfileImg" />
                 <span className="postUsername">{user.username}</span>
               </Link>
               <span className="postDate">{format(post.createdAt)}</span>

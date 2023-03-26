@@ -57,7 +57,7 @@ const Share = (props) => {
       <div className="shareWrapper">
         <div className="shareTop">
           <Link to={`/profile/${user.username}/${user._id}`}>
-            <img src={user.profilePicture || EMPTY_IMAGE_PATH} alt="profileImg" className="shareProfileImg" />
+            <img src={user.profilePicture.url || EMPTY_IMAGE_PATH} alt="profileImg" className="shareProfileImg" />
           </Link>
           <input type="text" className="shareInput" ref={desc} 
             placeholder={`What's on your mind, ${user.username}?`} />

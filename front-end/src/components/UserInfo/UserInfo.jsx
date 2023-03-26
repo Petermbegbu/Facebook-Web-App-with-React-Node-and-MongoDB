@@ -42,16 +42,20 @@ const UserInfo = (props) => {
         <h5 className='userInfoTitle'>User Information</h5>
 
         <div className='userInfoItem'>
-            <span className="userInfoKey">City:</span>
-            <span className="userInfoValue">{user.city}</span>
-        </div>
-        <div className='userInfoItem'>
-            <span className="userInfoKey">From:</span>
-            <span className="userInfoValue">{user.country}</span>
+            <span className="userInfoKey">Gender:</span>
+            <span className="userInfoValue">{user.gender}</span>
         </div>
         <div className='userInfoItem'>
             <span className="userInfoKey">Relationship:</span>
             <span className="userInfoValue">{user.relationship}</span>
+        </div>
+        <div className='userInfoItem'>
+            <span className="userInfoKey">City:</span>
+            <span className="userInfoValue">{user.city}</span>
+        </div>
+        <div className='userInfoItem'>
+            <span className="userInfoKey">Country:</span>
+            <span className="userInfoValue">{user.country}</span>
         </div>
       </div>
 

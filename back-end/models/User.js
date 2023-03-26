@@ -26,6 +26,11 @@ const UserSchema = new mongoose.Schema({
         minlength: [6, "Minimum length of password is 6 characters"]
     },
 
+    gender: {
+        type: String,
+        default: ""
+    },
+
     profilePicture: {
         public_id: {
             type: String,
@@ -59,7 +64,7 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
 
-    description: {
+    about: {
         type: String,
         default: ""
     },
