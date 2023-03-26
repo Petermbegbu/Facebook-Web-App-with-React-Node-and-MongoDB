@@ -42,7 +42,7 @@ export default function Register() {
       try {
         //We dont want to use redux for this call as we wont be updating redux state with any value,
         //we only want to register user
-        const res = await axios.post("/api/auth/signup", userCredentials);
+        await axios.post("/api/auth/signup", userCredentials);
 
         //programmatic navigation to login page
         useNavigate("/login");

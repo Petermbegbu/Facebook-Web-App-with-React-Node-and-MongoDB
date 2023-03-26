@@ -1,13 +1,15 @@
 const router = require("express").Router();
 
-const {updateUser, deleteUser, getUser, follow, unfollow, followings} = require("../controllers/userController");
+const {updateUser, deleteUser, getUser, getCurrentUser, follow, unfollow, followings} = require("../controllers/userController");
 
 
-router.put("/update/:id", updateUser);
+router.patch("/update/:id", updateUser);
 
 router.delete("/delete/:id", deleteUser);
 
 router.get("/get/:id", getUser);
+
+router.get("/current-user", getCurrentUser);
 
 router.put("/follow/:id", follow);
 

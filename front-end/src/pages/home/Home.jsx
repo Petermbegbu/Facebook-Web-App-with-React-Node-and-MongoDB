@@ -9,7 +9,6 @@ import "./Home.css";
 
 const Home = (props) => {
   const {user} = props;
-  
 
   return (
     <div className="homeContainer">

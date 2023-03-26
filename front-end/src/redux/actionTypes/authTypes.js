@@ -5,4 +5,6 @@ export const LOG_OUT = "LOG_OUT";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
+export const UPDATE_USER = "UPDATE_USER";
+
 

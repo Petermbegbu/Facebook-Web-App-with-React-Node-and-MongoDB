@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import axios from "axios";
 import { format } from "timeago.js";
 import { Send } from '@mui/icons-material';
@@ -15,7 +15,7 @@ function Comments(props) {
   const handleCommentSend = async () => {
     const text = commentText.current.value;
 
-    if (text.trim() == "") return;
+    if (text.trim() === "") return;
 
     const data = {
       text: text,

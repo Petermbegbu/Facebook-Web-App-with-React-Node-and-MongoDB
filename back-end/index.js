@@ -28,7 +28,7 @@ require("./database/mongodbConnect")
 //Middlewares
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(express.json());
+app.use(express.json({limit: "50mb"}));
 app.use(cookieParser());
 
 //HTTP Request routes

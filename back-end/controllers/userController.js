@@ -1,34 +1,62 @@
 const bcrypt = require("bcrypt");
 const Users = require("../models/User");
+const jwt = require("jsonwebtoken");
+const cloudinary = require("../utils/cloudinary");
 
 
 module.exports.updateUser = async (req, res) => {
-    const id = req.params.id;
-    const {userId} = req.body;
-    let {password} = req.body;
-    let (isAdmin) = req.user;
- 
+    const {id} = req.params;
+    const token = req.cookies.myCookieToken;
+    let body = req.body;
+    let userId = "";
 
-    if(id === userId || isAdmin) {
+    jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, decodedToken) => {
+        if(error){
+            res.status(500).json(error);
+        } else {
+            userId = decodedToken.id;
+        }
+    })
+
+    if(id === userId) {
         try {
-            if(password){
+            if(body.password){
                 const salt = await bcrypt.genSalt(10);
-                password = await bcrypt.hash(password, salt);
+                body.password = await bcrypt.hash(body.password, salt);
             }
 
-            //update the req.body
-            req.body.password = password;
+            //Push the picture url to claudinary if available
+            if(body.profilePicture ) {
+                const profileImgRes = await cloudinary.uploader.upload(body.profilePicture, {
+                    folder: "profileImages"
+                });
+
+                body.profilePicture = {
+                    public_id: profileImgRes.public_id,
+                    url: profileImgRes.secure_url
+                }
+            }
+
+            if(body.coverPicture ) {
+                const coverImgRes = await cloudinary.uploader.upload(body.coverPicture, {
+                    folder: "coverImages"
+                });
+
+                body.coverPicture = {
+                    public_id: coverImgRes.public_id,
+                    url: coverImgRes.secure_url
+                }
+            }
+            
 
             //update the database
-            const user = await Users.findByIdAndUpdate(id, {$set: req.body}, { runValidators: true }); 
-            //Note runValidators:true enables the model schema restrictions like minlength, maxlength etc. 
+            const user = await Users.findByIdAndUpdate(id, body, {new: true}); 
+            //Note: runValidators=true enables the model schema restrictions like minlength, maxlength etc. 
 
-            res.status(200).send("Account has been created!!");
+            res.status(200).send(user);
         } catch (err) {
-            console.log(err);
             res.status(500).send(err);
         }
-
     } else {
         res.status(403).send("You can only update your account!!");
     }
@@ -64,6 +92,25 @@ module.exports.getUser = async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
+    }
+}
+
+
+module.exports.getCurrentUser = (req, res) => {
+    const token = req.cookies.myCookieToken;
+
+    //check if token exist and is verified
+    if(token){
+        jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, decodedToken) => {
+            if(error){
+                res.status(500).json(error);
+            } else {
+                const user = await Users.findById(decodedToken.id);
+                res.status(200).json(user);
+            }
+        })
+    } else {
+        res.status(200).json(null);
     }
 }
 

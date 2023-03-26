@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -8,12 +8,25 @@ import Register from "./pages/Register/Register";
 import Messenger from "./pages/Messenger/Messenger";
 import Home from "./pages/home/Home";
 import { ThemeContext } from "./contextAPI";
+
+import { getCurrentUserAction } from "./redux/actionCreators/authCreators";
 import "./App.css";
 
+
+
 function App(props) {
-  const {user} = props;
+  const {user, getCurrentUserAction} = props;
 
   const {theme} = useContext(ThemeContext)
+
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      await getCurrentUserAction()
+    }
+
+    getCurrentUser();
+  }, [])
 
   return (
       <div className="appContainer" data-theme={theme}>
@@ -40,4 +53,4 @@ const mapStateToProps  = (state) => {
 }
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {getCurrentUserAction})(App);

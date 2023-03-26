@@ -51,7 +51,7 @@ const UserInfo = (props) => {
         </div>
         <div className='userInfoItem'>
             <span className="userInfoKey">Relationship:</span>
-            <span className="userInfoValue"></span>
+            <span className="userInfoValue">{user.relationship}</span>
         </div>
       </div>
 

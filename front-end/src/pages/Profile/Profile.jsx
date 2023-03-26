@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Leftbar from '../../components/Leftbar/Leftbar';
@@ -11,16 +12,19 @@ import UpdateModal from '../../components/UpdateModal/UpdateModal';
 import { EMPTY_IMAGE_PATH } from '../../variables';
 import "./Profile.css";
 
-const Profile = () => {
+const Profile = (props) => {
+    const {currentUser} = props;
+
     const {userID} = useParams();
 
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
     const [isModal, setIsModal] = useState(false)
+    const [isUpdate, setIsUpdate] = useState(false)
 
     //check for profile pictures
-    const profilePicture = user && user.profilePicture ? user.profilePicture : EMPTY_IMAGE_PATH;
-    const coverPicture = user && user.coverPicture ? user.coverPicture : "/images/posts/sky.jpg";
+    const profilePicture = user && user.profilePicture ? user.profilePicture.url : EMPTY_IMAGE_PATH;
+    const coverPicture = user && user.coverPicture ? user.coverPicture.url : "/images/posts/sky.jpg";
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -30,7 +34,7 @@ const Profile = () => {
         }
 
         fetchUser();
-    }, [userID])
+    }, [userID, isUpdate])
 
 
     useEffect(() => {
@@ -61,8 +65,15 @@ const Profile = () => {
                         
                         <div className='profileInfo'>
                             <h4 className="profileInfoName">{user && user.username}</h4>
-                            <span className="profileInfoDesc">{user && user.description}</span>
-                            <button className='btn btn-primary' onClick={() => setIsModal(!isModal)}>Update</button>
+                            <span className="profileInfoDesc">{user && user.followers.length} Followers</span>
+
+                            {
+                                user && user._id === currentUser._id && (
+                                    <button className='btn btn-primary' onClick={() => setIsModal(!isModal)}>
+                                        Update
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="row profileRightBottom">
@@ -90,7 +101,10 @@ const Profile = () => {
 
             <>
                 {
-                    isModal &&  <UpdateModal isModal={isModal} setIsModal={setIsModal}/>
+                    isModal &&  (
+                        <UpdateModal isModal={isModal} setIsModal={setIsModal}
+                            isUpdate={isUpdate} setIsUpdate={setIsUpdate}/>
+                    )
                 }
             </>
         </div>
@@ -99,5 +113,13 @@ const Profile = () => {
 }
 
 
+const mapStateToProps = (state) => {
+    const {auth} = state;
 
-export default Profile;
+    return {
+        currentUser: auth.user
+    }
+}
+
+
+export default connect(mapStateToProps)(Profile);

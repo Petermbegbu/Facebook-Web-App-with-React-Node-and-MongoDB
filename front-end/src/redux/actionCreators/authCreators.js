@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { SIGN_IN_START, SIGN_IN_FAILED, SIGN_IN_SUCCESS, 
-    LOG_OUT, GET_CURRENT_USER, FOLLOW, UNFOLLOW} from "../actionTypes/authTypes";
+    LOG_OUT, GET_CURRENT_USER, FOLLOW, UNFOLLOW, UPDATE_USER} from "../actionTypes/authTypes";
 
 
 
@@ -24,11 +24,10 @@ export const loginAction = (userCredentials) => {
 
 
 
-export const getCurrentUserAction = (userID) => {
+export const getCurrentUserAction = () => {
     return async (dispatch) => {
         try{
-            console.log("userID", userID);
-            const res = await axios.get(`/api/user/get/${userID}`);
+            const res = await axios.get("/api/user/current-user");
 
             dispatch({type: GET_CURRENT_USER, payload: res.data});
         } catch (err){
@@ -66,6 +65,23 @@ export const unFollowAction = (friendId) => {
         }
     }
 }
+
+
+
+export const updateUserAction = (userCredentials) => {
+    return async (dispatch, getState) => {
+        const currentUser = getState().auth.user;
+
+        try {
+            const res = await axios.patch(`/api/user/update/${currentUser._id}`, userCredentials);
+
+            dispatch({type: UPDATE_USER, payload: res.data})
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 
 
 export const logoutAction = () => {
