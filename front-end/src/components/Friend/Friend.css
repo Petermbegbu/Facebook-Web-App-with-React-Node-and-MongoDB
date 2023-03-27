@@ -1,29 +1,30 @@
-.followingDiv {
+.friendDiv {
     display: flex;
     align-items: center;
     padding: 10px 3px;
     cursor: pointer;
     border-radius: 10px 10px;
+    text-decoration: none;
 }
 
-.followingDiv:hover {
+.friendDiv:hover {
     background-color: #E4E6E9;
 }
 
 
-.followingImgDiv {
+.friendImgDiv {
     margin-right: 15px;
     position: relative;
 }
 
 
-.followingProfileImg {
-    width: 45px;
-    height: 45px;
+.friendProfileImg {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.followingUsername {
+.friendUsername {
     font-weight: 500;
 }

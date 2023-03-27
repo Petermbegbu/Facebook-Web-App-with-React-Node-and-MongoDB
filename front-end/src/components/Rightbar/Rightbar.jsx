@@ -2,21 +2,21 @@ import React, { useEffect } from 'react'
 import {CardGiftcard} from '@mui/icons-material';
 import { connect } from 'react-redux';
 
-import { getFollowingsAction } from '../../redux/actionCreators/friendsCreators';
-import Followings from '../Followings/Followings';
+import { getFindFriendsAction } from '../../redux/actionCreators/friendsCreators';
+import Friend from '../Friend/Friend';
 import "./Rightbar.css";
 
 const Rightbar = (props) => {
-  const {currentUser, followings, getFollowingsAction} = props;
+  const {findFriends, getFindFriendsAction} = props;
 
 
   useEffect(() => {
-    const getFollowings = async () => {
-      await getFollowingsAction(currentUser._id)
+    const getFindFriends = async () => {
+      await getFindFriendsAction()
     }
 
-    getFollowings();
-  }, [currentUser._id])
+    getFindFriends();
+  }, [])
 
 
   return (
@@ -49,11 +49,11 @@ const Rightbar = (props) => {
       <hr />
 
       <div>
-        <h6 className='text-secondary mb-3'>Following Friends</h6>
+        <h6 className='text-secondary mb-3'>Find Friends</h6>
 
         <ul className='rightbarFriendList'>
           {
-            followings.map(friend => <Followings key={friend._id} friend={friend} />)
+            findFriends && findFriends.map(friend => <Friend key={friend._id} friend={friend} />)
           }
         </ul>
       </div>
@@ -63,13 +63,12 @@ const Rightbar = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  const {auth, friends} = state;
+  const {friends} = state;
 
   return {
-    currentUser: auth.user,
-    followings: friends.followings
+    findFriends: friends.findFriends,
   }
 }
 
 
-export default connect(mapStateToProps, {getFollowingsAction})(Rightbar);
+export default connect(mapStateToProps, {getFindFriendsAction})(Rightbar);

@@ -84,7 +84,7 @@ const Profile = (props) => {
                             {user && <UserInfo user={user}/>}
 
                             <div className='userFriendsBlock'>
-                                <h5 className='userInfoTitle'>User Friends</h5>
+                                <h5 className='userInfoTitle'>Followings</h5>
 
                                 <div className='userFriends'>
                                     {

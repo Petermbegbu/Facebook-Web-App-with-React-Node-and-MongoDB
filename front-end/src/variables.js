@@ -1,1 +1,1 @@
-export const EMPTY_IMAGE_PATH = "/images/persons/emptyProfileImage.jpg";
+export const EMPTY_IMAGE_PATH = "/images/persons/EmptyProfile.jpg";

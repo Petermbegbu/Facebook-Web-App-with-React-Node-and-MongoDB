@@ -8,10 +8,10 @@ import "./UserFriends.css";
 const UserFriends = ({friend}) => {
 
   return (
-    <Link to={`/profile/${friend.username}/${friend._id}`} className="friendsLink col">
+    <Link to={`/profile/${friend.username}/${friend._id}`} className="friendsLink">
       <div className='userFriendItem'>
           <img src={friend.profilePicture || EMPTY_IMAGE_PATH} alt="" className="userFriendImg" />
-          <span className="userFriendName">{friend.username}</span>
+          <div className="userFriendName">{friend.username}</div>
       </div>
     </Link>
     

@@ -1,2 +1,6 @@
 export const FOLLOWINGS = "FOLLOWINGS";
 export const GET_RANDOM_USER = "GET_RANDOM_USER";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_FIND_FRIENDS = "GET_FIND_FRIENDS";
+
+

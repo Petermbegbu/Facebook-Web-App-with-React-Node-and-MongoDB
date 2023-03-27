@@ -96,6 +96,39 @@ module.exports.getUser = async (req, res) => {
 }
 
 
+module.exports.getAllUsers = async (req, res) => {
+
+    try {
+        const allUsers = await Users.find();
+        
+        res.status(200).json(allUsers);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
+module.exports.getFindFriends = async (req, res) => {
+    const id = req.params.id; //current user id
+
+    try {
+        const allUsers = await Users.find();
+        const currentUser = await Users.findById(id);
+
+        //Return friends you are not following
+        const findFriends = allUsers.filter(user => (
+            !currentUser.followings.some( id => id === user._id.toString()) 
+            && (user._id.toString() !== currentUser._id.toString())
+        ));
+
+        res.status(200).json(findFriends);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
+
 module.exports.getCurrentUser = (req, res) => {
     const token = req.cookies.myCookieToken;
 
