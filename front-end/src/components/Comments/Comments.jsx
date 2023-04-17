@@ -30,6 +30,7 @@ function Comments(props) {
     commentText.current.value = "";
   }
 
+
   return (
     <div className='commentOuterDiv'>
         <hr className='commentHr'/>
@@ -37,7 +38,7 @@ function Comments(props) {
           {
             comments.map((comment) => (
               <div className="commentDiv" key={comment._id}>
-                <img src={comment.profilePicture || EMPTY_IMAGE_PATH} alt="" className='commentImg'/>
+                <img src={comment.profilePicture.url || EMPTY_IMAGE_PATH} alt="" className='commentImg'/>
                 <div className="commentInfo">
                   <p className='commentName'>{comment.username}</p>
                   <p className='commentDesc'>{comment.text}</p>
@@ -49,7 +50,7 @@ function Comments(props) {
         </div>
 
         <div className='writeDiv sticky-bottom'>
-            <img src={currentUser.profilePicture || EMPTY_IMAGE_PATH} alt="" className="commentProfileImg"/>
+            <img src={currentUser.profilePicture.url || EMPTY_IMAGE_PATH} alt="" className="commentProfileImg"/>
             <input type="text" className='commentInput' placeholder='Write a comment' ref={commentText}/>
             <Send className='commentSendIcon' onClick={handleCommentSend}/>
         </div>

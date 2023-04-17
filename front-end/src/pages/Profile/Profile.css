@@ -60,22 +60,31 @@
     padding-right: 50px;
 }
 
-.userFriends {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px;
-}
 
-
-.userFriendsBlock {
+.userFriendBlock {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border-radius: 10px;
     background-color: var(--bgPosts);
     -webkit-box-shadow: var(--webkitBoxShadow); 
     box-shadow: var(--boxShadow);
     padding: 20px;
     color: var(--textColor)
-
+    
 }
+
+
+.userFriendTitle {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.userFriendDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+
+

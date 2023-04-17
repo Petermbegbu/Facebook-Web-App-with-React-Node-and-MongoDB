@@ -1,4 +1,5 @@
 const Messages = require("../models/Messages");
+const Users = require("../models/User");
 
 
 //Add message
@@ -23,7 +24,15 @@ module.exports.getMessages = async (req, res) => {
             _conversationId: conversationId
         }); //Returns all messages with the _conversationId = conversationId
 
-        res.status(200).json(messages);
+        const messageDetails = await Promise.all(
+            messages.map( async (message) => {
+                const {username, profilePicture} = await Users.findById(message._senderId);
+                
+                return {message, username, profilePicture}
+            })
+        ) 
+
+        res.status(200).json(messageDetails);
     } catch (err) {
         res.status(500).json(err);
     }

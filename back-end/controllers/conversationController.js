@@ -35,12 +35,16 @@ module.exports.getConversations = async (req, res) => {
 
 //Get one chat conversation
 module.exports.getConversation = async (req, res) => {
-    const {id1, id2} = req.params; // id of current user
+    const {id1, id2} = req.params; //id1 = currentuser id, id2 = receiver id
 
     try{
-        const conversation = await Conversations.findOne({
+        let conversation = await Conversations.findOne({
             membersIds: {$all: [id1, id2]}
         })
+
+        if(!conversation) {
+            conversation = await Conversations.create({membersIds: [id1, id2]});
+        }
 
         res.status(200).json(conversation);
     } catch (err) {

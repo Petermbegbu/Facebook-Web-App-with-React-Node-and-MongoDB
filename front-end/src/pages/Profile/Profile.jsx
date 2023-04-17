@@ -18,7 +18,8 @@ const Profile = (props) => {
     const {userID} = useParams();
 
     const [user, setUser] = useState(null);
-    const [friends, setFriends] = useState([]);
+    const [followings, setFollowings] = useState([]);
+    const [followers, setFollowers] = useState([]);
     const [isModal, setIsModal] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
 
@@ -38,13 +39,15 @@ const Profile = (props) => {
 
 
     useEffect(() => {
-        const getFollowings = async () => {
-          const res = await axios.get(`/api/user/followings/${userID}`);
-    
-          setFriends(res.data);
+        const getFriends = async () => {
+          const res1 = await axios.get(`/api/user/followings/${userID}`);
+          const res2 = await axios.get(`/api/user/followers/${userID}`);
+
+          setFollowings(res1.data);
+          setFollowers(res2.data);
         }
-    
-        getFollowings();
+        
+        getFriends();
     }, [userID])
 
 
@@ -83,16 +86,30 @@ const Profile = (props) => {
                         <div className='col-md-5'>
                             {user && <UserInfo user={user}/>}
 
-                            <div className='userFriendsBlock'>
-                                <h5 className='userInfoTitle'>Followings</h5>
+                            <div className='userFriendBlock'>
+                                <div className='userFriendTitle'>
+                                    {followings.length} Following{followings.length > 1 ? "s" : ""}
+                                </div>
 
-                                <div className='userFriends'>
+                                <div className='userFriendDiv'>
                                     {
-                                        friends.map(friend => <UserFriends key={friend._id} friend={friend} />)
+                                        followings.map(friend => <UserFriends key={friend._id} friend={friend} />)
                                     }
                                 </div>
                             </div>
 
+
+                            <div className='userFriendBlock'>
+                                <div className='userFriendTitle'>
+                                    {followers.length} Follower{followers.length > 1 ? "s" : ""}
+                                </div>
+
+                                <div className='userFriendDiv'>
+                                    {
+                                        followers.map(friend => <UserFriends key={friend._id} friend={friend} />)
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

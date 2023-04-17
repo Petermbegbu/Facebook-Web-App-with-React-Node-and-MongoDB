@@ -23,8 +23,16 @@
     object-fit: cover;
 }
 
+.messageName {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
 .messageText {
-    font-size: 14px;
+    font-size: 13px;
+    margin: 0;
 }
 
 .messageTop {

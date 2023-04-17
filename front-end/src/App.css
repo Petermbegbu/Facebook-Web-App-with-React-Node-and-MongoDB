@@ -26,6 +26,7 @@
     --chatBoxBackground: white;
     --commentBgColor: rgb(226, 223, 223);
     --errorTextColor: red;
+    --chatBackgroundImage: url("/images/background/lightMode.jpg")
 }
 
 
@@ -43,7 +44,7 @@
     --chatBoxBackground: rgb(34, 34, 34);
     --commentBgColor: rgb(58, 57, 57);
     --errorTextColor: rgb(203, 235, 20);
-
+    --chatBackgroundImage: url("/images/background/darkMode.png")
 }
 
 .appContainer {

@@ -1,0 +1,29 @@
+.offlineFriendDiv {
+    display: flex;
+    align-items: center;
+    padding: 10px 3px;
+    cursor: pointer;
+    border-radius: 10px 10px;
+    color: var(--textColor);
+}
+
+.offlineFriendDiv:hover {
+    background-color: var(--bgHover)
+}
+
+
+.offlineImgDiv {
+    margin-right: 15px;
+    position: relative;
+}
+
+.offlineProfileImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.offlineUsename {
+    font-weight: 500;
+}

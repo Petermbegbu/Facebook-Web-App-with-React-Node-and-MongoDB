@@ -10,7 +10,7 @@ const UserFriends = ({friend}) => {
   return (
     <Link to={`/profile/${friend.username}/${friend._id}`} className="friendsLink">
       <div className='userFriendItem'>
-          <img src={friend.profilePicture || EMPTY_IMAGE_PATH} alt="" className="userFriendImg" />
+          <img src={friend.profilePicture.url || EMPTY_IMAGE_PATH} alt="" className="userFriendImg" />
           <div className="userFriendName">{friend.username}</div>
       </div>
     </Link>

@@ -30,7 +30,6 @@ const Messenger = (props) => {
     setSocket(io("ws://localhost:5000"))
   }, [])
 
-
   //socket-io events listeners
   useEffect(() => {
     if(socket) {
@@ -60,9 +59,9 @@ const Messenger = (props) => {
   }, [currentChat._id, emit])
 
 
-  const handleChatListClick = (conversation) => {
-    setCurrentChat(conversation)
-  }
+  // const handleChatListClick = (conversation) => {
+  //   setCurrentChat(conversation)
+  // }
 
 
   const handleSendClick = async () => {
@@ -93,7 +92,7 @@ const Messenger = (props) => {
       <TopBar />
 
       <div className='messengerBlock row'>
-        <div className="chatMenu col-md-3">
+        <div className="chatMenu col-md-4">
           <div className="chatMenuWrapper chatUniform">
             <input type="text" className='form-control' placeholder='Search for Friends'/>
 
@@ -118,7 +117,7 @@ const Messenger = (props) => {
           </div>
         </div>
 
-        <div className="chatBox col-md-6">
+        <div className="chatBox col-md-8">
           <div className="chatUniform">
             <ScrollToBottom className="chatBoxTop">
               {
@@ -128,9 +127,10 @@ const Messenger = (props) => {
                       {
                         messages.map((m) => (
                             <Message  
-                              key={m._id}
+                              key={m.message._id}
                               message={m} 
-                              mine={m._senderId === currentUser._id}
+                              mine={m.message._senderId === currentUser._id}
+                              currentUser={currentUser}
                             />
                           )
                         )
@@ -145,35 +145,40 @@ const Messenger = (props) => {
               }
               
             </ScrollToBottom>
-            <div className='chatBoxBottom'>
-                <input 
+
+            {
+              currentChat._id ? (
+                <div className='chatBoxBottom'>
+                  <input 
                     type="text" className="chatInput" 
                     placeholder="Type a message"
                     value={textField} 
                     onKeyUp={handleKeyUp}
-                    disabled={currentChat._id ? false : true}  
+                    // disabled={currentChat._id ? false : true}  
                     onChange={(e) => setTextField(e.target.value)}
                   />
 
-                <button 
-                  className="btn btn-sm btn-primary" 
-                  disabled={currentChat._id ? false : true}  
-                  onClick={handleSendClick}
-                >
-                  <Send />
-                </button>
-              </div>
+                  <button 
+                    className="btn btn-sm btn-primary" 
+                    // disabled={currentChat._id ? false : true}  
+                    onClick={handleSendClick}
+                  >
+                    <Send />
+                  </button>
+                </div>
+              ) : ""
+            }
           </div>
         </div>
 
-        <div className="allFollowersWrapper col-md-3">
+        {/* <div className="allFollowersWrapper col-md-3">
           <div className="chatUniform">
             <div className='allFollowersTitleDiv'>
               <span className='allFollowersTitle'>All Followers</span>
             </div>
 
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

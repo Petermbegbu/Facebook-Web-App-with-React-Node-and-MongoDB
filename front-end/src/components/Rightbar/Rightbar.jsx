@@ -62,6 +62,7 @@ const Rightbar = (props) => {
   )
 }
 
+
 const mapStateToProps = (state) => {
   const {friends} = state;
 
